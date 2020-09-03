@@ -6,17 +6,9 @@ import {
 import { configureStore, getDefaultMiddleware } from '@reduxjs/toolkit';
 import { routerMiddleware } from 'connected-react-router';
 import { History } from 'history';
-import { composeWithDevTools } from 'redux-devtools-extension';
 import createSagaMiddleware from 'redux-saga';
 import createReducer from './createReducer';
 import sagas from './sagas';
-
-declare global {
-  interface Window {
-    __REDUX_DEVTOOLS_EXTENSION__?: typeof composeWithDevTools;
-    store?: () => InjectableStore;
-  }
-}
 
 interface StoreConfig {
   isDevelopment: boolean;
@@ -28,8 +20,7 @@ export default function configure(
     isDevelopment: process.env.NODE_ENV === 'development',
   },
 ): InjectableStore {
-  const reduxSagaMonitorOptions = {};
-  const sagaMiddleware = createSagaMiddleware(reduxSagaMonitorOptions);
+  const sagaMiddleware = createSagaMiddleware({});
   const middleware = [...getDefaultMiddleware(), routerMiddleware(history), sagaMiddleware];
   const reducer = createReducer(history);
   const store = configureStore({
@@ -40,12 +31,6 @@ export default function configure(
 
   const storeWithRJ = addReducerInjector(store, reducer);
   const storeWithSJ = addSagaInjector(storeWithRJ, sagaMiddleware.run, sagas);
-
-  // if (module.hot) {
-  //   module.hot.accept('store/index', () => {
-  //     // forceReducerReload(configure(history));
-  //   });
-  // }
 
   sagaMiddleware.run(sagas);
 
