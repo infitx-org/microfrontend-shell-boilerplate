@@ -10,7 +10,8 @@ const SideMenu: FC<unknown> = () => {
     <div className="layout__side-menu">
       <Menu path="/" pathname={location.pathname} onChange={history.push}>
         <MenuSection label="Apps">
-          <MenuItem path="/child" label="Child App microfrontend" partial />
+          <MenuItem path="/child" label="Child App 1 microfrontend" partial />
+          <MenuItem path="/other" label="Child App 2 microfrontend" partial />
         </MenuSection>
       </Menu>
     </div>

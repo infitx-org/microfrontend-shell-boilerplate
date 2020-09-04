@@ -38,6 +38,9 @@ const Welcome: FC<WelcomeProps> = () => {
             <Route path="/child">
               <ChildApp token={token} />
             </Route>
+            <Route path="/other">
+              <ChildApp token={token} />
+            </Route>
           </Switch>
         </Layout.Page>
       </Layout.Content>
