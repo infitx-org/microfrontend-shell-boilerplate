@@ -1,14 +1,18 @@
 import React, { FC, Suspense } from 'react';
 
 // @ts-ignore
-const ChildAppLoader = React.lazy(() => import('app/App'));
+const ChildApp = React.lazy(() => import('app/App'));
 
-const ChildApp: FC<unknown> = () => (
+interface ChildAppWrapperProps {
+  token: string | null;
+}
+
+const ChildAppWrapper: FC<ChildAppWrapperProps> = ({ token }) => (
   <div>
     <Suspense fallback={<div>Loading...</div>}>
-      <ChildAppLoader />
+      <ChildApp token={token} />
     </Suspense>
   </div>
 );
 
-export default ChildApp;
+export default ChildAppWrapper;
