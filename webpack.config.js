@@ -1,6 +1,7 @@
 const HtmlWebpackPlugin = require('html-webpack-plugin');
-const ModuleFederationPlugin = require('webpack/lib/container/ModuleFederationPlugin');
+const { ModuleFederationPlugin } = require('webpack').container;
 const path = require('path');
+const deps = require("./package.json").dependencies;
 
 module.exports = {
   entry: './src/index',
@@ -47,12 +48,12 @@ module.exports = {
         enforce: 'pre',
         test: /\.(ts|js)x?$/,
         use: 'eslint-loader',
-        exclude: [/node_modules/, /modusbox\-ui\-components/],
+        exclude: [/node_modules/],
       },
       {
         test: /\.(ts|js)x?$/,
         use: 'ts-loader',
-        exclude: [/node_modules/, /modusbox\-ui\-components/],
+        exclude: [/node_modules/],
       },
       {
         test: /\.css$/i,
@@ -68,9 +69,51 @@ module.exports = {
   plugins: [
     new ModuleFederationPlugin({
       remotes: {
-        app: 'app',
+        app: 'app@http://localhost:3002/app.js',
       },
-      shared: ['react', 'react-dom', 'react-redux', 'react-router-dom'], // The modules that are being shared across the apps
+      shared: {
+        ...deps,
+        react: {
+          // eager: true,
+          singleton: true,
+          // requiredVersion: deps.react
+        },
+        'react-dom': {
+          // eager: true,
+          singleton: true,
+          // requiredVersion: deps['react-dom'],
+        },
+        'react-redux': {
+          // eager: true,
+          singleton: true,
+          // requiredVersion: deps['react-redux'],
+        },
+        'react-router-dom': {
+          // eager: true,
+          singleton: true,
+          // requiredVersion: deps['react-router-dom'],
+        },
+        redux: {
+          // eager: true,
+          singleton: true,
+          // requiredVersion: deps.redux,
+        },
+        'redux-saga': {
+          // eager: true,
+          singleton: true,
+          // requiredVersion: deps['redux-saga'],
+        },
+        history: {
+          // eager: true,
+          singleton: true,
+          // requiredVersion: deps.history,
+        },
+        '@modusbox/modusbox-ui-components': {
+          // eager: true,
+          singleton: true,
+          // requiredVersion: deps['@modusbox/modusbox-ui-components'],
+        },
+      }, // The modules that are being shared across the apps
     }),
     new HtmlWebpackPlugin({
       template: './public/index.html',

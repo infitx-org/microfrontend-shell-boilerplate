@@ -1,18 +1,8 @@
-import React, { FC, Suspense } from 'react';
+import React, { FC } from 'react';
 // import { useHistory } from 'react-router-dom';
 import { Title } from 'components';
 import { useBasePath } from './hooks';
-
-// @ts-ignore
-const ChildAppLoader = React.lazy(() => import('app/App'));
-
-const ChildApp = () => (
-  <div>
-    <Suspense fallback={<div>Loading...</div>}>
-      <ChildAppLoader />
-    </Suspense>
-  </div>
-);
+import ChildApp from './ChildApp';
 
 const App: FC<unknown> = () => {
   /* const history = useHistory(); */
