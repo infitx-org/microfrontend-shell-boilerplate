@@ -5,7 +5,6 @@ const deps = require('./package.json').dependencies;
 
 module.exports = {
   entry: './src/index',
-  mode: 'development',
   devtool: 'cheap-module-source-map',
   devServer: {
     disableHostCheck: true,
@@ -81,42 +80,42 @@ module.exports = {
         ...deps,
         react: {
           // eager: true,
-          singleton: true,
+          // singleton: true,
           // requiredVersion: deps.react
         },
         'react-dom': {
           // eager: true,
-          singleton: true,
+          // singleton: true,
           // requiredVersion: deps['react-dom'],
         },
         'react-redux': {
           // eager: true,
-          singleton: true,
+          // singleton: true,
           // requiredVersion: deps['react-redux'],
         },
         'react-router-dom': {
           // eager: true,
-          singleton: true,
+          // singleton: true,
           // requiredVersion: deps['react-router-dom'],
         },
         redux: {
           // eager: true,
-          singleton: true,
+          // singleton: true,
           // requiredVersion: deps.redux,
         },
         'redux-saga': {
           // eager: true,
-          singleton: true,
+          // singleton: true,
           // requiredVersion: deps['redux-saga'],
         },
         history: {
           // eager: true,
-          singleton: true,
+          // singleton: true,
           // requiredVersion: deps.history,
         },
         '@modusbox/modusbox-ui-components': {
           // eager: true,
-          singleton: true,
+          // singleton: true,
           // requiredVersion: deps['@modusbox/modusbox-ui-components'],
         },
       }, // The modules that are being shared across the apps

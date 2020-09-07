@@ -1,9 +1,0 @@
-{
-  "redirects": [
-    {
-      "source": "/api",
-      "destination": "http://localhost",
-      "type": 302
-    }
-  ]
-}
