@@ -6,7 +6,7 @@
   "scripts": {
     "start": "webpack-dev-server",
     "build": "webpack --mode production",
-    "serve": "serve dist -s -p 3002",
+    "serve": "serve dist -s -p 3001",
     "lint": "eslint --ext .js,.jsx,.ts,.tsx src --color",
     "prettier": "prettier --write 'src/**/*.{ts,tsx,js,scss,css,json}' 'webpack.*.js'"
   },

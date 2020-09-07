@@ -1,3 +1,4 @@
+import { useState, useEffect } from 'react';
 import { useRouteMatch } from 'react-router-dom';
 
 export function useBasePath(): string {
@@ -6,4 +7,17 @@ export function useBasePath(): string {
   const match = useRouteMatch();
   const { path } = match;
   return path === '/' ? '' : path;
+}
+
+export function useToken(prevToken: string | null = null): string | null {
+  const [token, setToken] = useState(prevToken);
+
+  useEffect(() => {
+    fetch('/api')
+      .then((res) => res.json())
+      .then((data) => setToken(data.access_token))
+      .catch(() => setToken(null));
+  }, []);
+
+  return token;
 }
