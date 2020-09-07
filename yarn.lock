@@ -1088,10 +1088,10 @@
     "@types/yargs" "^15.0.0"
     chalk "^3.0.0"
 
-"@modusbox/modusbox-ui-components@2.0.0-3":
-  version "2.0.0-3"
-  resolved "https://registry.yarnpkg.com/@modusbox/modusbox-ui-components/-/modusbox-ui-components-2.0.0-3.tgz#ffbd397eb05b281601987819a7ba36724bb9cfed"
-  integrity sha512-MK2E3qgBuzt5UOM4sNmxhlTEWcuZhDvp1DUZGKPhtgsw8XUlgj4PsSeTXzyx419E7UU1OCFaDymhPdTAGnWNJQ==
+"@modusbox/modusbox-ui-components@2.0.0-5":
+  version "2.0.0-5"
+  resolved "https://registry.yarnpkg.com/@modusbox/modusbox-ui-components/-/modusbox-ui-components-2.0.0-5.tgz#0c8e4a7cffc6d4a49723052809e23d2669bdd7c1"
+  integrity sha512-+4DocWEWjoahDXZudWVAZDSVukddyzd2o5qB50l7VqU0X0d7Xapi+Rj2CsaN77V4auWpgDEjZvehrMS9bAe3wA==
   dependencies:
     "@babel/cli" "^7.0.0"
     "@babel/core" "^7.8.7"
@@ -1121,7 +1121,7 @@
     react-hot-loader "4.12.13"
     react-redux "^7.2.1"
     react-resize-detector "5.0.4"
-    redux "4.0.1"
+    redux "4.0.5"
     redux-mock-store "^1.5.3"
     redux-thunk "^2.3.0"
     ts-loader "^8.0.2"
@@ -6671,14 +6671,6 @@ redux-toolkit@^1.1.2:
     flux-standard-action "^0.6.0"
     invariant "^2.1.1"
     lodash "^3.10.1"
-
-redux@4.0.1:
-  version "4.0.1"
-  resolved "https://registry.yarnpkg.com/redux/-/redux-4.0.1.tgz#436cae6cc40fbe4727689d7c8fae44808f1bfef5"
-  integrity sha512-R7bAtSkk7nY6O/OYMVR9RiBI+XghjF9rlbl5806HJbQph0LJVHZrU5oaO4q70eUKiqMRqm4y07KLTlMZ2BlVmg==
-  dependencies:
-    loose-envify "^1.4.0"
-    symbol-observable "^1.2.0"
 
 redux@4.0.5, redux@^4.0.0, redux@^4.0.4:
   version "4.0.5"
