@@ -76,49 +76,17 @@ module.exports = {
       remotes: {
         app: 'app@http://localhost:3002/app.js',
       },
-      shared: {
-        ...deps,
-        react: {
-          // eager: true,
-          // singleton: true,
-          // requiredVersion: deps.react
-        },
-        'react-dom': {
-          // eager: true,
-          // singleton: true,
-          // requiredVersion: deps['react-dom'],
-        },
-        'react-redux': {
-          // eager: true,
-          // singleton: true,
-          // requiredVersion: deps['react-redux'],
-        },
-        'react-router-dom': {
-          // eager: true,
-          // singleton: true,
-          // requiredVersion: deps['react-router-dom'],
-        },
-        redux: {
-          // eager: true,
-          // singleton: true,
-          // requiredVersion: deps.redux,
-        },
-        'redux-saga': {
-          // eager: true,
-          // singleton: true,
-          // requiredVersion: deps['redux-saga'],
-        },
-        history: {
-          // eager: true,
-          // singleton: true,
-          // requiredVersion: deps.history,
-        },
-        '@modusbox/modusbox-ui-components': {
-          // eager: true,
-          // singleton: true,
-          // requiredVersion: deps['@modusbox/modusbox-ui-components'],
-        },
-      }, // The modules that are being shared across the apps
+      shared: [
+        'react',
+        'react-dom',
+        'react-redux',
+        'react-router-dom',
+        'redux',
+        'redux-saga',
+        'history',
+        '@reduxjs/toolkit',
+        '@modusbox/modusbox-ui-components',
+      ],
     }),
     new HtmlWebpackPlugin({
       template: './public/index.html',
