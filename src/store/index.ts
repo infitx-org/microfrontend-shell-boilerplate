@@ -27,6 +27,8 @@ export default function configure(
     devTools: config.isDevelopment,
   });
 
+  // TODO: Fix ui-components not returning Task https://github.com/modusintegration/modusbox-ui-components/blob/version2/src/rredux/injectors/types.ts#L4
+  // @ts-ignore
   const injectableStore = addInjectors(store, reducer, sagas, sagaMiddleware.run);
 
   sagaMiddleware.run(sagas);
