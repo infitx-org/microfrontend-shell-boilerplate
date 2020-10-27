@@ -1,4 +1,7 @@
-import { addInjectors, InjectableStore } from '@modusbox/modusbox-ui-components/dist/redux/injectors';
+import {
+  addInjectors,
+  InjectableStore,
+} from '@modusbox/modusbox-ui-components/dist/redux/injectors';
 import { configureStore, getDefaultMiddleware } from '@reduxjs/toolkit';
 import { routerMiddleware } from 'connected-react-router';
 import { History } from 'history';
