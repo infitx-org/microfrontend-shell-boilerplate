@@ -35,6 +35,7 @@
     "@types/webpack-env": "^1.15.2",
     "@typescript-eslint/eslint-plugin": "^3.10.1",
     "@typescript-eslint/parser": "^3.10.1",
+    "axe-core": "^4.0.2",
     "axios": "^0.20.0",
     "babel-loader": "^8.1.0",
     "babel-plugin-syntax-async-functions": "^6.13.0",

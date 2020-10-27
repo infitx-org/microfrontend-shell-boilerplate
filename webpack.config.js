@@ -1,7 +1,6 @@
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const { ModuleFederationPlugin } = require('webpack').container;
 const path = require('path');
-const deps = require('./package.json').dependencies;
 
 module.exports = {
   entry: './src/index',
@@ -57,8 +56,23 @@ module.exports = {
       },
       {
         test: /\.(ts|js)x?$/,
-        use: 'ts-loader',
         exclude: [/node_modules/],
+        use: [
+          {
+            loader: 'babel-loader',
+            options: {
+              plugins: [
+                require.resolve('@babel/plugin-proposal-class-properties'),
+                require.resolve('@babel/plugin-proposal-object-rest-spread'),
+                require.resolve('babel-plugin-syntax-async-functions'),
+                require.resolve('@babel/plugin-transform-runtime'),
+              ].filter(Boolean),
+            },
+          },
+          {
+            loader: 'ts-loader',
+          },
+        ],
       },
       {
         test: /\.css$/i,
