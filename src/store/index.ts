@@ -1,7 +1,6 @@
 import {
+  addInjectors,
   InjectableStore,
-  addReducerInjector,
-  addSagaInjector,
 } from '@modusbox/modusbox-ui-components/dist/redux/injectors';
 import { configureStore, getDefaultMiddleware } from '@reduxjs/toolkit';
 import { routerMiddleware } from 'connected-react-router';
@@ -13,6 +12,8 @@ import sagas from './sagas';
 interface StoreConfig {
   isDevelopment: boolean;
 }
+
+type Saga = () => Generator;
 
 export default function configure(
   history: History,
@@ -29,10 +30,11 @@ export default function configure(
     devTools: config.isDevelopment,
   });
 
-  const storeWithRJ = addReducerInjector(store, reducer);
-  const storeWithSJ = addSagaInjector(storeWithRJ, sagaMiddleware.run, sagas);
+  // TODO: Fix ui-components not returning Task https://github.com/modusintegration/modusbox-ui-components/blob/version2/src/rredux/injectors/types.ts#L4
+  // @ts-ignore
+  const injectableStore = addInjectors(store, reducer, sagas, sagaMiddleware.run);
 
   sagaMiddleware.run(sagas);
 
-  return storeWithSJ;
+  return injectableStore;
 }
