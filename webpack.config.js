@@ -102,8 +102,8 @@ module.exports = {
         '@modusbox/modusbox-ui-components',
       ],
     }),
-    new HtmlWebpackPlugin({
-      template: './public/index.html',
-    }),
+    // new HtmlWebpackPlugin({
+    //   template: './public/index.html',
+    // }),
   ],
 };
