@@ -1,9 +1,7 @@
 import React, { FC, Suspense } from 'react';
 
-// eslint-disable-next-line
 // @ts-ignore
 const ChildApp: FC<ChildAppWrapperProps> = React.lazy(() => import('app/App'));
-// const ChildApp: FC<{ token }> = ({ token }) => <span>{token}</span>;
 
 interface ChildAppWrapperProps {
   token: string | null;
