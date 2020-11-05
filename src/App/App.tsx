@@ -2,7 +2,8 @@ import React, { FC } from 'react';
 import { Switch, Route } from 'react-router-dom';
 import { useToken } from './hooks';
 
-import ChildApp from './ChildApp';
+import ChildApp from './ChildApp/ChildApp';
+import SecondChildApp from './ChildApp/SecondChildApp';
 import Layout from './Layout';
 
 const App: FC<unknown> = () => {
@@ -19,7 +20,7 @@ const App: FC<unknown> = () => {
               <ChildApp token={token} />
             </Route>
             <Route path="/other">
-              <ChildApp token={token} />
+              <SecondChildApp token={token} />
             </Route>
           </Switch>
         </Layout.Page>

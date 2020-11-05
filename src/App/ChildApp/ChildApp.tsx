@@ -7,12 +7,15 @@ interface ChildAppWrapperProps {
   token: string | null;
 }
 
-const ChildAppWrapper: FC<ChildAppWrapperProps> = ({ token }) => (
-  <div>
-    <Suspense fallback={<div>Loading...</div>}>
-      <ChildApp token={token} />
-    </Suspense>
-  </div>
-);
+const ChildAppWrapper: FC<ChildAppWrapperProps> = ({ token }) => {
+  console.log('he');
+  return (
+    <div>
+      <Suspense fallback={<div>Loading...</div>}>
+        <ChildApp token={token} />
+      </Suspense>
+    </div>
+  );
+};
 
 export default ChildAppWrapper;
