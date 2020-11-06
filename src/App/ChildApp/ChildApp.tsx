@@ -8,7 +8,6 @@ interface ChildAppWrapperProps {
 }
 
 const ChildAppWrapper: FC<ChildAppWrapperProps> = ({ token }) => {
-  console.log('he');
   return (
     <div>
       <Suspense fallback={<div>Loading...</div>}>
