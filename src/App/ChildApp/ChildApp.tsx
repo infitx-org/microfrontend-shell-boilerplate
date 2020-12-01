@@ -1,4 +1,5 @@
 import React, { FC, Suspense } from 'react';
+import loadComponent from 'utils/loader';
 
 /* eslint-disable */
 interface ErrorBoundaryState {
@@ -31,57 +32,8 @@ class ErrorBoundary extends React.Component<{}, ErrorBoundaryState> {
   }
 }
 
-class WebpackContainerError extends Error {
-  constructor(message) {
-    super(message);
-    this.name = 'Webpack Container Error';
-  }
-}
-
-class WebpackLoadingError extends Error {
-  constructor(message) {
-    super(message);
-    this.name = 'Webpack Loading Error';
-  }
-}
-
-function loadComponent(url: string, scope: string, moduleName: string) {
-  return () =>
-    new Promise((resolve, reject) => {
-      const script = document.createElement('script');
-      script.src = url;
-      script.onload = async () => {
-        try {
-          // @ts-ignore
-          await __webpack_init_sharing__('default');
-          // @ts-ignore
-          const container = window[scope];
-          if (!container) {
-            reject(new WebpackContainerError(`container ${scope} not found`));
-          }
-
-          // @ts-ignore
-          await container.init(__webpack_share_scopes__.default);
-          // @ts-ignore
-          const factory = await window[scope].get(`./${moduleName}`);
-          const Module = factory();
-          resolve(Module);
-        } catch (error) {
-          reject(error);
-        }
-      };
-      script.onerror = () => {
-        reject(new WebpackLoadingError(`Error loading from ${url}`));
-      };
-
-      const head =
-        document.querySelector('head') || document.body.appendChild(document.createElement('head'));
-      head.appendChild(script);
-    });
-}
-
 /* eslint-enable */
-const ComponentLoadingPromise = loadComponent('http://localhost:3002/aspp.js', 'app', 'App');
+const ComponentLoadingPromise = loadComponent('http://localhost:3002/app.js', 'app', 'App');
 
 // @ts-ignore
 const ChildApp: FC<ChildAppWrapperProps> = React.lazy(ComponentLoadingPromise);
