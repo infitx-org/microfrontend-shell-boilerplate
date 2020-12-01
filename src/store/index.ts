@@ -29,7 +29,7 @@ export default function configure(
   const injectors = applyInjectors({
     staticReducers,
     sagaRunner: sagaMiddleware.run,
-    rootSaga: rootSaga,
+    rootSaga,
   });
   const composeEnhancers = composeWithDevTools({});
   const store = createStore(
