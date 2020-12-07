@@ -1,8 +1,6 @@
 import React, { FC } from 'react';
 
-type Page = {};
-
-const Page: FC<Page> = ({ children }) => {
+const Page: FC<unknown> = ({ children }) => {
   return <div className="layout__page">{children}</div>;
 };
 

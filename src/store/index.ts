@@ -14,8 +14,6 @@ interface StoreConfig {
   isDevelopment: boolean;
 }
 
-type Saga = () => Generator;
-
 export default function configure(
   history: History,
   // eslint-disable-next-line
