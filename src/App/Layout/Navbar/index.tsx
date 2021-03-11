@@ -1,11 +1,11 @@
 import React, { FC } from 'react';
 import { Icon, Tooltip } from 'components';
 
-type Navbar = {
+type NavbarProps = {
   username: string;
 };
 
-const Navbar: FC<Navbar> = ({ username }) => (
+const Navbar: FC<NavbarProps> = ({ username }) => (
   <div className="layout__navbar">
     <div className="layout__navbar__controls">
       <a className="layout__navbar__link" href="/">
