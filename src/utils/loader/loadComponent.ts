@@ -2,38 +2,66 @@ import { ComponentType } from 'react';
 import WebpackContainerError from './WebpackContainerError';
 import WebpackLoadingError from './WebpackLoadingError';
 
+function Mm() {
+  // @ts-ignore
+  this.loaded = false;
+  // @ts-ignore
+  this.callbacks = [];
+  // @ts-ignore
+  this.registerCallback = (fn: any) => {
+    // @ts-ignore
+    if (this.loaded) {
+      fn();
+    } else {
+      // @ts-ignore
+      this.callbacks.push(fn);
+    }
+  };
+  // @ts-ignore
+  this.executeCallbacks = () => {
+    // @ts-ignore
+    this.loaded = true;
+    let fn;
+    // @ts-ignore
+    while ((fn = this.callbacks.pop())) { // eslint-disable-line
+      fn();
+    }
+  };
+  // @ts-ignore
+  this.modules = new Map();
+}
+
 export default (function loadComponentWrapper() {
-  const loaded = new Map();
+  const apps = new Map();
 
   return function loadComponent(
     url: string,
     scope: string,
-    moduleName: string,
+    module: string,
   ): () => Promise<{ default: ComponentType<any> }> {
     return () =>
       new Promise((resolve, reject) => {
-        // defines the reference to track
-        const ref = `${url}${scope}`;
+        // defines the applicaton reference
+        const app = `${url}#${scope}`;
 
         async function init() {
-          const subMap = loaded.get(ref);
-          if (subMap.has(moduleName)) {
-            resolve(subMap.get(moduleName));
-            return;
-          }
-
-          try {
-            // @ts-ignore
-            const factory = await window[scope].get(`./${moduleName}`);
-            const Module = factory();
-
-            subMap.set(moduleName, Module);
-            loaded.set(ref, subMap);
-
-            resolve(Module);
-          } catch (e) {
-            reject(new WebpackContainerError(`module ${moduleName} not found`));
-          }
+          const mm = apps.get(app);
+          mm.registerCallback(async () => {
+            const { modules } = mm;
+            if (!modules.has(module)) {
+              try {
+                // @ts-ignore
+                const factory = await window[scope].get(`./${module}`);
+                const Module = factory();
+                modules.set(module, Module);
+              } catch (e) {
+                reject(new WebpackContainerError(`module ${module} not found`));
+              }
+            }
+            console.log(mm);
+            console.log(url, scope, module);
+            resolve(modules.get(module));
+          });
         }
 
         async function load() {
@@ -49,16 +77,18 @@ export default (function loadComponentWrapper() {
 
             // @ts-ignore
             await container.init(__webpack_share_scopes__.default);
-            loaded.set(ref, new Map());
             init();
+            apps.get(app).executeCallbacks();
           } catch (error) {
             reject(error);
           }
         }
 
-        if (loaded.has(ref)) {
+        if (apps.has(app)) {
           init();
         } else {
+          // @ts-ignore
+          apps.set(app, new Mm());
           const script = document.createElement('script');
           script.src = url;
           script.onerror = () => {

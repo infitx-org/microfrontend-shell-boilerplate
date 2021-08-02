@@ -9,24 +9,17 @@ interface LoaderProps {
   [x: string]: unknown;
 }
 
-class Loader extends React.Component<LoaderProps, {}> {
-  Microfrontend: FC<unknown>;
+const Loader: FC<LoaderProps> = (props) => {
+  const { url, appName, module, children, ...other } = props;
+  const Component = React.lazy(loadComponent(url, appName, module));
 
-  constructor(props: LoaderProps) {
-    super(props);
-    this.Microfrontend = React.lazy(loadComponent(props.url, props.appName, props.module));
-  }
-
-  render() {
-    const { appName, url, module, children, ...props } = this.props;
-    return (
-      <ErrorBoundary>
-        <Suspense fallback={<div>Loading...</div>}>
-          <this.Microfrontend {...props}>{children}</this.Microfrontend>
-        </Suspense>
-      </ErrorBoundary>
-    );
-  }
-}
+  return (
+    <ErrorBoundary>
+      <Suspense fallback={<div>Loading...</div>}>
+        <Component {...other}>{children}</Component>
+      </Suspense>
+    </ErrorBoundary>
+  );
+};
 
 export default Loader;

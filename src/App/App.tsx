@@ -16,11 +16,11 @@ const App: FC<unknown> = () => {
         <Layout.Page>
           <Switch>
             <Route path="/child">
-              <Title>App loaded from external script</Title>
+              <Title>App loaded from external script: 3002</Title>
               <MicrofrontendOne token={token} />
             </Route>
             <Route path="/other">
-              <Title>App loaded from external script</Title>
+              <Title>App loaded from external script: 3003</Title>
               <MicrofrontendTwo token={token} />
             </Route>
           </Switch>
