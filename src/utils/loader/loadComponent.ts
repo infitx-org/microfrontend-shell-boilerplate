@@ -3,68 +3,59 @@ import WebpackContainerError from './WebpackContainerError';
 import WebpackLoadingError from './WebpackLoadingError';
 
 export default (function loadComponentWrapper() {
-  const loaded = new Map();
+  const apps = new Map();
 
   return function loadComponent(
     url: string,
     scope: string,
-    moduleName: string,
+    component: string,
   ): () => Promise<{ default: ComponentType<any> }> {
     return () =>
       new Promise((resolve, reject) => {
-        // defines the reference to track
-        const ref = `${url}${scope}`;
+        // defines the applicaton reference
+        const app = `${url}#${scope}`;
 
-        async function init() {
-          const subMap = loaded.get(ref);
-          if (subMap.has(moduleName)) {
-            resolve(subMap.get(moduleName));
-            return;
-          }
-
-          try {
-            // @ts-ignore
-            const factory = await window[scope].get(`./${moduleName}`);
-            const Module = factory();
-
-            subMap.set(moduleName, Module);
-            loaded.set(ref, subMap);
-
-            resolve(Module);
-          } catch (e) {
-            reject(new WebpackContainerError(`module ${moduleName} not found`));
-          }
+        async function init(currentScope: string) {
+          // @ts-ignore
+          const factory = await window[currentScope].get(`./${component}`);
+          const Module = factory();
+          resolve(Module);
         }
 
-        async function load() {
-          try {
-            // @ts-ignore
-            await __webpack_init_sharing__('default');
+        function makeLoad(element: Element) {
+          return async function load() {
+            try {
+              // @ts-ignore
+              await __webpack_init_sharing__('default');
 
-            // @ts-ignore
-            const container = window[scope];
-            if (!container) {
-              reject(new WebpackContainerError(`container ${scope} not found`));
+              // @ts-ignore
+              const container = window[scope];
+              if (!container) {
+                reject(new WebpackContainerError(`container ${scope} not found`));
+              }
+
+              // @ts-ignore
+              await container.init(__webpack_share_scopes__.default);
+              init(scope);
+            } catch (error) {
+              reject(error);
+            } finally {
+              element.parentNode?.removeChild(element);
             }
-
-            // @ts-ignore
-            await container.init(__webpack_share_scopes__.default);
-            loaded.set(ref, new Map());
-            init();
-          } catch (error) {
-            reject(error);
-          }
+          };
         }
 
-        if (loaded.has(ref)) {
-          init();
+        if (apps.has(app)) {
+          init(scope);
         } else {
+          // @ts-ignore
+          apps.set(app, true);
           const script = document.createElement('script');
           script.src = url;
           script.onerror = () => {
             reject(new WebpackLoadingError(`Error loading from ${url}`));
           };
-          script.onload = load;
+          script.onload = makeLoad(script);
 
           const head =
             document.querySelector('head') ||

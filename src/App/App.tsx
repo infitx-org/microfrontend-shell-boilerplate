@@ -2,7 +2,7 @@ import React, { FC } from 'react';
 import { Switch, Route } from 'react-router-dom';
 import { useToken } from './hooks';
 
-import { Title, MicrofrontendOne, MicrofrontendTwo } from './Microfrontends';
+import { MicrofrontendOne, MicrofrontendTwo } from './Microfrontends';
 import Layout from './Layout';
 
 const App: FC<unknown> = () => {
@@ -16,11 +16,9 @@ const App: FC<unknown> = () => {
         <Layout.Page>
           <Switch>
             <Route path="/child">
-              <Title>App loaded from external script</Title>
               <MicrofrontendOne token={token} />
             </Route>
             <Route path="/other">
-              <Title>App loaded from external script</Title>
               <MicrofrontendTwo token={token} />
             </Route>
           </Switch>

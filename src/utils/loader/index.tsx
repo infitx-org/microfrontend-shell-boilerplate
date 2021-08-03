@@ -1,32 +1,24 @@
-import React, { FC, Suspense } from 'react';
+import React, { Suspense } from 'react';
 import loadComponent from './loadComponent';
 import ErrorBoundary from './ErrorBoundary';
 
 interface LoaderProps {
   url: string;
   appName: string;
-  module: string;
+  component: string;
   [x: string]: unknown;
 }
 
-class Loader extends React.Component<LoaderProps, {}> {
-  Microfrontend: FC<unknown>;
+function Loader({ url, appName, component, children, ...other }: LoaderProps) {
+  const Component = React.lazy(loadComponent(url, appName, component));
 
-  constructor(props: LoaderProps) {
-    super(props);
-    this.Microfrontend = React.lazy(loadComponent(props.url, props.appName, props.module));
-  }
-
-  render() {
-    const { appName, url, module, children, ...props } = this.props;
-    return (
-      <ErrorBoundary>
-        <Suspense fallback={<div>Loading...</div>}>
-          <this.Microfrontend {...props}>{children}</this.Microfrontend>
-        </Suspense>
-      </ErrorBoundary>
-    );
-  }
+  return (
+    <ErrorBoundary>
+      <Suspense fallback={<div>Loading...</div>}>
+        <Component {...other}>{children}</Component>
+      </Suspense>
+    </ErrorBoundary>
+  );
 }
 
 export default Loader;
