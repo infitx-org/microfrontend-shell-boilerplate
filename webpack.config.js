@@ -69,11 +69,12 @@ module.exports = {
               ].filter(Boolean),
             },
           },
-          {
-            loader: 'ts-loader',
-          },
         ],
       },
+      // {
+      //   test: /\.tsx?$/,
+      //   loader: 'ts-loader',
+      // },
       {
         test: /\.css$/i,
         use: [
@@ -91,9 +92,6 @@ module.exports = {
   },
   plugins: [
     new ModuleFederationPlugin({
-      // remotes: {
-      //   app: 'app@http://localhost:3002/app.js',
-      // },
       shared: [
         'react',
         'react-dom',
