@@ -1,17 +1,16 @@
-import React, { FC, Suspense } from 'react';
+import React, { Suspense } from 'react';
 import loadComponent from './loadComponent';
 import ErrorBoundary from './ErrorBoundary';
 
 interface LoaderProps {
   url: string;
   appName: string;
-  module: string;
+  component: string;
   [x: string]: unknown;
 }
 
-const Loader: FC<LoaderProps> = (props) => {
-  const { url, appName, module, children, ...other } = props;
-  const Component = React.lazy(loadComponent(url, appName, module));
+function Loader({ url, appName, component, children, ...other }: LoaderProps) {
+  const Component = React.lazy(loadComponent(url, appName, component));
 
   return (
     <ErrorBoundary>
@@ -20,6 +19,6 @@ const Loader: FC<LoaderProps> = (props) => {
       </Suspense>
     </ErrorBoundary>
   );
-};
+}
 
 export default Loader;
