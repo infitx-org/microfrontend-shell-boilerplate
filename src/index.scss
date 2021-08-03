@@ -1,6 +1,36 @@
+// This section refers to the react-components override
+@use '@modusbox/react-components/lib/index' with (
+  $primary: rgb(7, 128, 250),
+  $border-color--default: #ccc,
+  $border-width--default: 1px,
+  $border-width--themed: 1px,
+  // flags
+  $themed-border-top: true,
+  $themed-border-bottom: true,
+  $themed-border-left: true,
+  $themed-border-right: true,
+);
+
 * {
   box-sizing: border-box;
   -webkit-font-smoothing: antialiased;
+}
+
+body {
+  margin: 0;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  -webkit-overflow-scrolling: touch;
+  font-family: Fira Sans, sans-serif;
+  font-style: normal;
+  font-weight: 400;
+  font-size: 14px;
+  color: #333;
+  position: relative;
+}
+
+code {
+  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New', monospace;
 }
 
 html,
@@ -16,32 +46,13 @@ html {
   -webkit-text-size-adjust: 100%;
 }
 
-body {
-  font-family: Fira Sans, sans-serif;
-  font-style: normal;
-  font-weight: 400;
-  -moz-osx-font-smoothing: grayscale;
-  font-size: 14px;
-  color: #333;
-  margin: 0;
-  -webkit-overflow-scrolling: touch;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-}
-
-code {
-  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New', monospace;
-}
-
 a {
   text-decoration: none;
   color: #00a2df;
 }
+
 a:hover {
   color: #48c1ed;
-}
-p {
-  margin: 20px 0;
 }
 
 h1,
@@ -89,11 +100,9 @@ h6 {
 }
 
 p {
+  margin: 20px 0;
   font-size: 1.4rem;
   letter-spacing: 0;
-}
-
-p {
   font-family: Fira Sans, sans-serif;
   font-style: normal;
   font-weight: 400;

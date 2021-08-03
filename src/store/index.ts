@@ -1,7 +1,5 @@
-import {
-  applyInjectors,
-  InjectableStore,
-} from '@modusbox/modusbox-ui-components/dist/redux/injectors';
+import applyInjectors from '@modusbox/redux-utils/injectors/applyInjectors';
+import { InjectableStore } from '@modusbox/redux-utils/injectors/types';
 import { composeWithDevTools } from 'redux-devtools-extension';
 import { applyMiddleware, createStore, combineReducers } from 'redux';
 import { routerMiddleware } from 'connected-react-router';
