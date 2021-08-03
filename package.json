@@ -1,6 +1,6 @@
 {
   "name": "microfrontend-shell-boilerplate",
-  "version": "1.2.7",
+  "version": "1.2.8",
   "description": "",
   "main": "index.js",
   "scripts": {
@@ -10,9 +10,9 @@
     "lint-staged": "lint-staged",
     "lint-style": "stylelint --syntax=scss 'src/**/*.scss'",
     "lint": "eslint --ext .js,.jsx,.ts,.tsx src --color",
-    "test": "jest --env=jsdom",
     "prepare": "husky install",
-    "prettier": "prettier --write 'src/**/*.{ts,tsx,js,scss,css,json}' 'webpack.*.js'"
+    "prettier": "prettier --write 'src/**/*.{ts,tsx,js,scss,css,json}' 'webpack.*.js'",
+    "test": "jest --env=jsdom"
   },
   "author": "",
   "license": "ISC",
