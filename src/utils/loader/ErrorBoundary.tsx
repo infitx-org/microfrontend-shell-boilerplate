@@ -1,3 +1,5 @@
+import { MessageBox } from 'components';
+import WarnIcon from 'bootstrap-icons/icons/exclamation-diamond-fill.svg';
 import React from 'react';
 
 interface ErrorBoundaryState {
@@ -22,9 +24,9 @@ class ErrorBoundary extends React.Component<unknown, ErrorBoundaryState> {
   render() {
     if (this.state.error) {
       return (
-        <span style={{ color: 'red' }}>
-          {this.state.error.name} : {this.state.error.message}
-        </span>
+        <MessageBox kind="danger" icon={<WarnIcon />}>
+          <b>{this.state.error.name}</b> : {this.state.error.message}
+        </MessageBox>
       );
     }
 
