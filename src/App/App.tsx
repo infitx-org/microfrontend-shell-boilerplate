@@ -1,18 +1,21 @@
 import React, { FC } from 'react';
 import { Switch, Route } from 'react-router-dom';
+import { Layout } from 'components';
 import { useToken } from './hooks';
 
+import Menu from './Menu';
 import { MicrofrontendOne, MicrofrontendTwo } from './Microfrontends';
-import Layout from './Layout';
 
 const App: FC<unknown> = () => {
   const token = useToken();
 
   return (
-    <Layout.Container>
-      <Layout.Navbar username="Guest User" />
+    <Layout>
+      <Layout.Navbar username="Guest User" title="Shell Application Container" />
       <Layout.Content>
-        <Layout.SideMenu />
+        <Layout.SideMenu>
+          <Menu />
+        </Layout.SideMenu>
         <Layout.Page>
           <Switch>
             <Route path="/child">
@@ -24,7 +27,7 @@ const App: FC<unknown> = () => {
           </Switch>
         </Layout.Page>
       </Layout.Content>
-    </Layout.Container>
+    </Layout>
   );
 };
 

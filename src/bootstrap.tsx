@@ -4,7 +4,7 @@ import { Provider, ReactReduxContext } from 'react-redux';
 import { createBrowserHistory } from 'history';
 import { ConnectedRouter } from 'connected-react-router';
 import configureStore from './store';
-import './index.css';
+import './index.scss';
 import App from './App';
 
 const history = createBrowserHistory();

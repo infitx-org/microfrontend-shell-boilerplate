@@ -76,12 +76,14 @@ module.exports = {
       //   loader: 'ts-loader',
       // },
       {
-        test: /\.css$/i,
+        test: /\.(s)?css$/i,
         use: [
           // Creates `style` nodes from JS strings
           'style-loader',
           // Translates CSS into CommonJS
           'css-loader',
+          // SCSS
+          'sass-loader',
         ],
       },
       {
@@ -101,7 +103,7 @@ module.exports = {
         'redux-saga',
         'history',
         '@reduxjs/toolkit',
-        '@modusbox/modusbox-ui-components',
+        '@modusbox/react-components',
       ],
     }),
     new HtmlWebpackPlugin({
