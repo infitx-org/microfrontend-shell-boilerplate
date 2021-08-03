@@ -24,7 +24,7 @@ class ErrorBoundary extends React.Component<unknown, ErrorBoundaryState> {
   render() {
     if (this.state.error) {
       return (
-        <MessageBox kind="danger" icon={<WarnIcon />}>
+        <MessageBox kind="danger" icon={<WarnIcon />} size={30}>
           <b>{this.state.error.name}</b> : {this.state.error.message}
         </MessageBox>
       );
