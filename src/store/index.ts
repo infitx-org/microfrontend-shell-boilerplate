@@ -1,5 +1,5 @@
-import applyInjectors from '@modusbox/redux-utils/injectors/applyInjectors';
-import { InjectableStore } from '@modusbox/redux-utils/injectors/types';
+import { injectors } from '@modusbox/redux-utils';
+import { InjectableStore } from '@modusbox/redux-utils/lib/injectors/types';
 import { composeWithDevTools } from 'redux-devtools-extension';
 import { applyMiddleware, createStore, combineReducers } from 'redux';
 import { routerMiddleware } from 'connected-react-router';
@@ -22,7 +22,7 @@ export default function configure(
   const sagaMiddleware = createSagaMiddleware({});
   const staticReducers = createReducer(history);
   const middlewares = applyMiddleware(routerMiddleware(history), sagaMiddleware);
-  const injectors = applyInjectors({
+  const withInjectors = injectors.applyInjectors({
     staticReducers,
     sagaRunner: sagaMiddleware.run,
     rootSaga,
@@ -32,7 +32,7 @@ export default function configure(
     combineReducers(staticReducers),
     undefined,
     // @ts-ignore
-    composeEnhancers(injectors, middlewares),
+    composeEnhancers(withInjectors, middlewares),
   );
 
   sagaMiddleware.run(rootSaga);
