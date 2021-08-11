@@ -54,6 +54,7 @@ export default (function loadComponentWrapper() {
           script.src = url;
           script.onerror = () => {
             reject(new WebpackLoadingError(`Error loading from ${url}`));
+            apps.delete(app);
           };
           script.onload = makeLoad(script);
 
