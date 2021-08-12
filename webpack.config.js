@@ -1,6 +1,7 @@
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const { ModuleFederationPlugin } = require('webpack').container;
 const path = require('path');
+const ForkTsCheckerWebpackPlugin = require('fork-ts-checker-webpack-plugin');
 
 module.exports = {
   entry: './src/index',
@@ -71,10 +72,13 @@ module.exports = {
           },
         ],
       },
-      // {
-      //   test: /\.tsx?$/,
-      //   loader: 'ts-loader',
-      // },
+      {
+        test: /\.tsx?$/,
+        loader: 'ts-loader',
+        options: {
+          transpileOnly: true,
+        }
+      },
       {
         test: /\.(s)?css$/i,
         use: [
@@ -98,6 +102,11 @@ module.exports = {
     ],
   },
   plugins: [
+    new ForkTsCheckerWebpackPlugin({
+      eslint: {
+        files: './src/**/*.{ts,tsx,js,jsx}',
+      },
+    }),
     new ModuleFederationPlugin({
       shared: [
         'react',

@@ -2,7 +2,7 @@ import React, { FC } from 'react';
 import Loader from '../../utils/loader';
 
 export const Title: FC<unknown> = ({ children }) => (
-  <Loader url="http://localhost:3002/app.js" appName="app" module="Title">
+  <Loader url="http://localhost:3002/app.js" appName="app" component="Title">
     {children}
   </Loader>
 );

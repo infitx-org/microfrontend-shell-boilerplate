@@ -1,4 +1,5 @@
 import { MessageBox } from 'components';
+// @ts-ignore
 import WarnIcon from 'bootstrap-icons/icons/exclamation-diamond-fill.svg';
 import React from 'react';
 
