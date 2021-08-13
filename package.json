@@ -1,6 +1,6 @@
 {
   "name": "microfrontend-shell-boilerplate",
-  "version": "1.2.11",
+  "version": "1.2.12",
   "description": "",
   "main": "index.js",
   "scripts": {
@@ -68,6 +68,7 @@
     "eslint-plugin-prettier": "^3.1.4",
     "eslint-plugin-react": "^7.20.6",
     "eslint-plugin-react-hooks": "^4.0.4",
+    "fork-ts-checker-webpack-plugin": "^6.3.2",
     "history": "4.10.1",
     "html-webpack-plugin": "^5.0.0-alpha.7",
     "husky": "^7.0.1",
