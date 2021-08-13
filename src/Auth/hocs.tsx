@@ -5,11 +5,11 @@ import Auth from './Auth';
 
 export function withAuth(App: ComponentType<AuthAppProps>) {
   const AuthLoader = (props: AuthProps): JSX.Element => {
-    const { isAuthEnabled, isLoggedIn, userEmail, checkAuth, onLogoutClick } = props;
+    const { isAuthEnabled, isLoggedIn, userEmail, doAuth, onLogoutClick } = props;
 
     useEffect(() => {
       if (isAuthEnabled) {
-        checkAuth();
+        doAuth();
       }
     }, []);
 

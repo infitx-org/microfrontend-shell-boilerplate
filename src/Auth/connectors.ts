@@ -12,7 +12,7 @@ const authConnector = connect(
     userEmail: selectors.getUserEmail(state),
   }),
   (dispatch: Dispatch) => ({
-    checkAuth: () => dispatch(actions.checkAuth()),
+    doAuth: () => dispatch(actions.doAuth()),
     onLogoutClick: () => dispatch(actions.logout()),
   }),
 );

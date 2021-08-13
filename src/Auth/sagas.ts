@@ -9,19 +9,19 @@ function* doAuth() {
     const { status, data } = yield call(apis.whoami.read, {});
 
     if (is200(status)) {
-      yield put(actions.checkAuthSuccess(data));
+      yield put(actions.doAuthSuccess(data));
     } else if (is401(status)) {
       window.location.href = yield select(selectors.getLoginEndpoint);
     } else {
       yield put(
-        actions.checkAuthFailed(
+        actions.doAuthFailed(
           'There was an error while performing authentication. Please try again later',
         ),
       );
     }
   } catch (e) {
     yield put(
-      actions.checkAuthFailed('Currently unable to perform authentication. Please try again later'),
+      actions.doAuthFailed('Currently unable to perform authentication. Please try again later'),
     );
   }
 }
@@ -30,8 +30,8 @@ function* logout() {
   window.location.href = yield select(selectors.getLogoutEndpoint);
 }
 
-function* checkAuthSaga() {
-  yield takeLatest([actions.checkAuth.type], doAuth);
+function* doAuthSaga() {
+  yield takeLatest([actions.doAuth.type], doAuth);
 }
 
 function* logoutSaga() {
@@ -39,5 +39,5 @@ function* logoutSaga() {
 }
 
 export default function* rootSaga() {
-  yield all([checkAuthSaga(), logoutSaga()]);
+  yield all([doAuthSaga(), logoutSaga()]);
 }

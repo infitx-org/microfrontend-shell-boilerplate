@@ -21,13 +21,13 @@ const slice = createSlice({
     logout(state: AuthState) {
       return state;
     },
-    checkAuth(state: AuthState) {
+    doAuth(state: AuthState) {
       return {
         ...state,
         isAuthPending: true,
       };
     },
-    checkAuthSuccess(state: AuthState, action: PayloadAction<LoggedUser>) {
+    doAuthSuccess(state: AuthState, action: PayloadAction<LoggedUser>) {
       return {
         ...state,
         isLoggedIn: true,
@@ -36,7 +36,7 @@ const slice = createSlice({
         authError: initialState.authError,
       };
     },
-    checkAuthFailed(state: AuthState, action: PayloadAction<string>) {
+    doAuthFailed(state: AuthState, action: PayloadAction<string>) {
       return {
         ...state,
         user: initialState.user,
