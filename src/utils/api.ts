@@ -1,7 +1,6 @@
 import { State } from 'store/types';
 import authMock from 'Auth/_mockData';
-// @ts-ignore
-import buildApis, { buildEndpointBuilder } from '@modusbox/redux-utils/api';
+import buildApis, { buildEndpointBuilder } from '@modusbox/redux-utils/lib/api';
 
 const services = {
   kratos: {
