@@ -5,7 +5,7 @@ import { applyMiddleware, createStore } from 'redux';
 import { routerMiddleware } from 'connected-react-router';
 import { History } from 'history';
 import createSagaMiddleware from 'redux-saga';
-import getCreateReducer from './createReducer';
+import getCreateReducer, { getReducers } from './createReducer';
 import rootSaga from './sagas';
 
 interface StoreConfig {
@@ -20,8 +20,7 @@ export default function configure(config: StoreConfig, preloadedState = {}): Inj
   const staticReducers = createReducer();
   const middlewares = applyMiddleware(routerMiddleware(history), sagaMiddleware);
   const withInjectors = injectors.applyInjectors({
-    // @ts-ignore
-    staticReducers,
+    staticReducers: getReducers(history),
     sagaRunner: sagaMiddleware.run,
     rootSaga,
   });

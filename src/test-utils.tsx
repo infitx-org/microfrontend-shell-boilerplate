@@ -10,7 +10,6 @@ function render(ui: ReactElement<unknown>, { ...renderOptions } = {}) {
   const history = createMemoryHistory();
   const store = configure({ isDevelopment: true, history });
 
-  // @ts-ignore
   const wrapper: FC<unknown> = ({ children }) => {
     return (
       <Provider store={store}>
