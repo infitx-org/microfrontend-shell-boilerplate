@@ -1,7 +1,7 @@
 import { Dispatch as ReduxDispatch } from 'redux';
-import { RouterState } from 'connected-react-router';
+import createReducer from './createReducer';
 
-export interface State {
-  router: RouterState;
-}
+const rootReducer = createReducer()();
+
+export type State = ReturnType<typeof rootReducer>;
 export type Dispatch = ReduxDispatch;
