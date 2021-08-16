@@ -1,7 +1,8 @@
 const HtmlWebpackPlugin = require('html-webpack-plugin');
-const { ModuleFederationPlugin } = require('webpack').container;
-const path = require('path');
 const ForkTsCheckerWebpackPlugin = require('fork-ts-checker-webpack-plugin');
+const { ModuleFederationPlugin } = require('webpack').container;
+const DotenvPlugin = require('dotenv-webpack');
+const path = require('path');
 
 module.exports = {
   entry: './src/index',
@@ -77,7 +78,7 @@ module.exports = {
         loader: 'ts-loader',
         options: {
           transpileOnly: true,
-        }
+        },
       },
       {
         test: /\.(s)?css$/i,
@@ -102,6 +103,7 @@ module.exports = {
     ],
   },
   plugins: [
+    new DotenvPlugin(),
     new ForkTsCheckerWebpackPlugin({
       eslint: {
         files: './src/**/*.{ts,tsx,js,jsx}',

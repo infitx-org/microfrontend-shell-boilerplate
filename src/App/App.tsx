@@ -1,4 +1,4 @@
-import React, { FC } from 'react';
+import React from 'react';
 import { Switch, Route } from 'react-router-dom';
 import { Layout } from 'components';
 import { useToken } from './hooks';
@@ -6,7 +6,7 @@ import { useToken } from './hooks';
 import Menu from './Menu';
 import { MicrofrontendOne, MicrofrontendTwo } from './Microfrontends';
 
-const App: FC<unknown> = () => {
+function App() {
   const token = useToken();
 
   return (
@@ -29,6 +29,6 @@ const App: FC<unknown> = () => {
       </Layout.Content>
     </Layout>
   );
-};
+}
 
 export default App;
