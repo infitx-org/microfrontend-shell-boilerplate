@@ -1,6 +1,6 @@
 {
   "name": "microfrontend-shell-boilerplate",
-  "version": "1.2.13",
+  "version": "1.2.14",
   "description": "",
   "main": "index.js",
   "scripts": {
