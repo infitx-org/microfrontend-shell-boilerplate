@@ -2,8 +2,50 @@ import { ComponentType } from 'react';
 import WebpackContainerError from './WebpackContainerError';
 import WebpackLoadingError from './WebpackLoadingError';
 
+class Externals {
+  private apps = new Map<string, boolean>();
+
+  private callbacks = new Map<string, (() => void)[]>();
+
+  addApp(app: string) {
+    this.apps.set(app, false);
+  }
+
+  hasApp(app: string) {
+    return this.apps.has(app);
+  }
+
+  hasLoadedApp(app: string) {
+    return this.apps.get(app) === true;
+  }
+
+  setCallback(app: string, fn: () => void) {
+    const cbs = this.callbacks.get(app) || [];
+    cbs.push(fn);
+    this.callbacks.set(app, cbs);
+  }
+
+  runCallbacks(app: string) {
+    this.apps.set(app, true);
+
+    const callbacks = this.callbacks.get(app);
+
+    if (callbacks) {
+      callbacks.forEach((callback) => callback());
+    }
+  }
+}
+
+async function init(resolve: (arg: any) => void, scope: string, component: string) {
+  // @ts-ignore
+  const factory = await window[scope].get(`./${component}`);
+  const Module = factory();
+  resolve(Module);
+}
+
 export default (function loadComponentWrapper() {
   const apps = new Map();
+  const externals = new Externals();
 
   return function loadComponent(
     url: string,
@@ -15,14 +57,7 @@ export default (function loadComponentWrapper() {
         // defines the applicaton reference
         const app = `${url}#${scope}`;
 
-        async function init(currentScope: string) {
-          // @ts-ignore
-          const factory = await window[currentScope].get(`./${component}`);
-          const Module = factory();
-          resolve(Module);
-        }
-
-        function makeLoad(element: Element) {
+        function makeLoad(element: Element, appName: string) {
           return async function load() {
             try {
               // @ts-ignore
@@ -36,27 +71,38 @@ export default (function loadComponentWrapper() {
 
               // @ts-ignore
               await container.init(__webpack_share_scopes__.default);
-              init(scope);
             } catch (error) {
               reject(error);
             } finally {
+              externals.runCallbacks(appName);
               element.parentNode?.removeChild(element);
             }
           };
         }
 
-        if (apps.has(app)) {
-          init(scope);
+        // this is the callback returning the compnent we want to run
+        // once the script is loaded and the container is initialized
+        const resolveComponent = () => init(resolve, scope, component);
+
+        if (externals.hasLoadedApp(app)) {
+          // resolve immediately
+          resolveComponent();
+        } else if (externals.hasApp(app)) {
+          // resolve once ready
+          externals.setCallback(app, resolveComponent);
         } else {
-          // @ts-ignore
-          apps.set(app, true);
+          // start the loading
+          externals.addApp(app);
+          externals.setCallback(app, resolveComponent);
+
+          // setup the script
           const script = document.createElement('script');
           script.src = url;
           script.onerror = () => {
             reject(new WebpackLoadingError(`Error loading from ${url}`));
             apps.delete(app);
           };
-          script.onload = makeLoad(script);
+          script.onload = makeLoad(script, app);
 
           const head =
             document.querySelector('head') ||
