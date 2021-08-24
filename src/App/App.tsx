@@ -1,6 +1,7 @@
 import React from 'react';
 import { Switch, Route } from 'react-router-dom';
 import { Layout } from 'components';
+import { useAuthConfig } from 'Config';
 import { useToken } from './hooks';
 
 import Menu from './Menu';
@@ -8,6 +9,7 @@ import { MicrofrontendOne, MicrofrontendTwo } from './Microfrontends';
 
 function App() {
   const token = useToken();
+  const authConfig = useAuthConfig();
 
   return (
     <Layout>
@@ -19,10 +21,13 @@ function App() {
         <Layout.Page>
           <Switch>
             <Route path="/child">
-              <MicrofrontendOne token={token} />
+              <MicrofrontendOne token={token} authConfig={authConfig} />
             </Route>
             <Route path="/other">
-              <MicrofrontendTwo token={token} />
+              <MicrofrontendTwo token={token} authConfig={authConfig} />
+            </Route>
+            <Route path="/signin">
+              <p>Please authenticate again</p>
             </Route>
           </Switch>
         </Layout.Page>
