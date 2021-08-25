@@ -12,7 +12,7 @@ function MainMenu() {
     onChange: history.push,
   };
 
-  let menu = (
+  const menu = (
     <Menu {...menuProps}>
       <Menu.Section label="Apps">
         <Menu.Item path="/child" label="Child App 1 microfrontend" />
@@ -21,11 +21,16 @@ function MainMenu() {
     </Menu>
   );
 
-  if (location.pathname.startsWith('/child')) {
-    menu = <MenuOne path="/child" pathname={location.pathname} onChange={history.push} />;
-  }
+  // if (location.pathname.startsWith('/child')) {
+  //   menu = ;
+  // }
 
-  return <div className="layout__side-menu">{menu}</div>;
+  return (
+    <div className="layout__side-menu">
+      {menu}
+      <MenuOne path="/child" pathname={location.pathname} onChange={history.push} />
+    </div>
+  );
 }
 
 export default MainMenu;
