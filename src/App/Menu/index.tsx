@@ -15,22 +15,16 @@ function MainMenu() {
   const menu = (
     <Menu {...menuProps}>
       <Menu.Section label="Apps">
-        <Menu.Item path="/child" label="Child App 1 microfrontend" />
+        <Menu.Item path="/child" label="Child App 1 microfrontend" partial>
+          <Menu.Item path="/" label="back to main menu" back />
+          <MenuOne path="/child" pathname={location.pathname} onChange={history.push} />
+        </Menu.Item>
         <Menu.Item path="/other" label="Child App 2 microfrontend" />
       </Menu.Section>
     </Menu>
   );
 
-  // if (location.pathname.startsWith('/child')) {
-  //   menu = ;
-  // }
-
-  return (
-    <div className="layout__side-menu">
-      {menu}
-      <MenuOne path="/child" pathname={location.pathname} onChange={history.push} />
-    </div>
-  );
+  return <div className="layout__side-menu">{menu}</div>;
 }
 
 export default MainMenu;
