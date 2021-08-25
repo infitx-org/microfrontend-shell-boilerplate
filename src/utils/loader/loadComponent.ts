@@ -48,11 +48,11 @@ async function init(resolve: (arg: any) => void, scope: string, component: strin
 
 const externals = new Externals();
 
-export default function loadComponent(
+export default function loadComponent<Props = any>(
   url: string,
   scope: string,
   component: string,
-): () => Promise<{ default: ComponentType<any> }> {
+): () => Promise<{ default: ComponentType<Props> }> {
   return () =>
     new Promise((resolve, reject) => {
       // defines the applicaton reference
