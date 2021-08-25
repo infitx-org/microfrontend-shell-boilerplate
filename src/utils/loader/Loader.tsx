@@ -1,4 +1,4 @@
-import React, { ComponentType, Suspense } from 'react';
+import React, { Component, ComponentType, Suspense } from 'react';
 import loadComponent from './loadComponent';
 import ErrorBoundary from './ErrorBoundary';
 
@@ -14,21 +14,28 @@ function BaseFallback() {
   return <div>Loading...</div>;
 }
 
-export default function Loader({
-  url,
-  appName,
-  component,
-  Fallback = BaseFallback,
-  children,
-  ...otherProps
-}: LoaderProps) {
-  const Component = React.lazy(loadComponent(url, appName, component));
+export default class Loader extends Component<LoaderProps> {
+  private AsyncComponent: ComponentType;
 
-  return (
-    <ErrorBoundary>
-      <Suspense fallback={<Fallback />}>
-        <Component {...otherProps}>{children}</Component>
-      </Suspense>
-    </ErrorBoundary>
-  );
+  constructor(props: LoaderProps) {
+    super(props);
+    const { url, appName, component } = this.props;
+
+    // load before mount so that it's stored in memory and won't cause
+    // reloads when rendered again
+    this.AsyncComponent = React.lazy(loadComponent(url, appName, component));
+  }
+
+  render() {
+    const { Fallback = BaseFallback, children, ...otherProps } = this.props;
+    const { AsyncComponent } = this;
+
+    return (
+      <ErrorBoundary>
+        <Suspense fallback={<Fallback />}>
+          <AsyncComponent {...otherProps}>{children}</AsyncComponent>
+        </Suspense>
+      </ErrorBoundary>
+    );
+  }
 }
