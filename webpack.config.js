@@ -14,6 +14,10 @@ const config = {
   PUBLIC_PATH: PUBLIC_PATH || parsed.PUBLIC_PATH,
 }
 
+
+console.log({ config });
+
+
 module.exports = {
   entry: './src/index',
   devtool: 'cheap-module-source-map',
