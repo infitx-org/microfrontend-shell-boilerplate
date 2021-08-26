@@ -2034,10 +2034,10 @@
     "@types/yargs" "^16.0.0"
     chalk "^4.0.0"
 
-"@modusbox/react-components@^0.1.2-15":
-  version "0.1.2-15"
-  resolved "https://registry.yarnpkg.com/@modusbox/react-components/-/react-components-0.1.2-15.tgz#1b0ce30b12707cff666209778a307e4a7f3f8f40"
-  integrity sha512-5e4kqE/McFOFfufIMzHNdo7aPkFRvSMBTL7YAsxN9yQsjlGGHRuQR39rWPUjyiqId5NqYqGTnZedQyj/1o8j5g==
+"@modusbox/react-components@^0.1.2-16":
+  version "0.1.2-16"
+  resolved "https://registry.yarnpkg.com/@modusbox/react-components/-/react-components-0.1.2-16.tgz#525206c54fe42d990464edcfdef4a2df90f72474"
+  integrity sha512-FTdgz10BF3awFbV+eWRpEkJKvrZPyc2zbNaKgVzaLxybvkG1hitb0d6/B5dE+5vCMJyP22ydG6KC05j9RRzzVw==
   dependencies:
     "@modusbox/ts-utils" "^0.0.4"
     babel-plugin-react-docgen "^4.2.1"
