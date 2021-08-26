@@ -15,7 +15,7 @@ export function MicrofrontendOne(props: SharedProps) {
 }
 
 export function MenuOne(props: any) {
-  return <Loader url="http://localhost:3012/app.js" appName="app" component="Menu" {...props} />;
+  return <Loader url={url} appName={name} component="Menu" {...props} />;
 }
 
 export function MicrofrontendTwo(props: SharedProps) {
