@@ -4,6 +4,16 @@ const { ModuleFederationPlugin } = require('webpack').container;
 const DotenvPlugin = require('dotenv-webpack');
 const path = require('path');
 
+const { DEV_PORT, VERCEL_URL } = process.env;
+const { parsed } = require('dotenv').config({
+  path: './.env',
+});
+
+const config = {
+  DEV_PORT: DEV_PORT || parsed.DEV_PORT,
+  PUBLIC_PATH: VERCEL_URL ? `https://${VERCEL_URL}/` : parsed.PUBLIC_PATH,
+};
+
 module.exports = {
   entry: './src/index',
   devtool: 'cheap-module-source-map',
@@ -30,7 +40,7 @@ module.exports = {
     injectClient: false,
     historyApiFallback: true, // React Router
     contentBase: path.join(__dirname, 'dist'),
-    port: 3001,
+    port: config.DEV_PORT,
     host: '0.0.0.0',
     publicPath: '/',
     proxy: {
@@ -42,7 +52,7 @@ module.exports = {
   },
   output: {
     path: path.resolve(__dirname, 'dist'),
-    publicPath: 'http://localhost:3001/', // Where it's going to be expected to be published for being externally loaded
+    publicPath: config.PUBLIC_PATH, // Where it's going to be expected to be published for being externally loaded
   },
   resolve: {
     modules: [path.resolve(__dirname, 'src'), 'node_modules'],
@@ -103,7 +113,9 @@ module.exports = {
     ],
   },
   plugins: [
-    new DotenvPlugin(),
+    new DotenvPlugin({
+      systemvars: true,
+    }),
     new ForkTsCheckerWebpackPlugin({
       eslint: {
         files: './src/**/*.{ts,tsx,js,jsx}',
