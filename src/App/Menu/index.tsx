@@ -3,26 +3,17 @@ import { Menu } from 'components';
 import { useHistory, useLocation } from 'react-router-dom';
 import Loader from 'utils/loader';
 import { MenuItemElement } from '@modusbox/react-components/lib/components/Menu/types';
-
-const data = [
-  {
-    path: '/child',
-    label: 'The One',
-    component: 'Menu',
-    url: 'http://localhost:3012/app.js',
-    appName: 'app',
-  },
-];
+import microfrontends from 'microfrontends';
 
 function getMenuItems(pathname: string, onChange: (path: string) => void) {
-  return data.map(({ path, label, component, url, appName }) => {
+  return microfrontends.map(({ path, label, menuComponent, url, appName }) => {
     return (
       <Menu.Item key={path} path={path} label={label} partial>
         <Menu.Item path="/" label="back to main menu" back />
         <Loader
           url={url}
           appName={appName}
-          component={component}
+          component={menuComponent}
           pathname={pathname}
           onChange={onChange}
           path={path}

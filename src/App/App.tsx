@@ -1,14 +1,28 @@
 import React from 'react';
 import { Switch, Route } from 'react-router-dom';
 import { Layout } from 'components';
-import { useAuthConfig } from 'Config';
-import { useToken } from './hooks';
-
+import { useAuthConfig, AuthConfig } from 'Config';
+import microfrontends from 'microfrontends';
+import Loader from 'utils/loader';
 import Menu from './Menu';
-import { MicrofrontendOne, MicrofrontendTwo } from './Microfrontends';
+
+function getRoutes(authConfig: AuthConfig) {
+  return microfrontends.map(({ path, appComponent, url, appName }) => {
+    return (
+      <Route path={path} key={path}>
+        <Loader
+          url={url}
+          appName={appName}
+          component={appComponent}
+          authConfig={authConfig}
+          path={path}
+        />
+      </Route>
+    );
+  });
+}
 
 function App() {
-  const token = useToken();
   const authConfig = useAuthConfig();
 
   return (
@@ -19,17 +33,7 @@ function App() {
           <Menu />
         </Layout.SideMenu>
         <Layout.Page>
-          <Switch>
-            <Route path="/child">
-              <MicrofrontendOne token={token} authConfig={authConfig} />
-            </Route>
-            <Route path="/other">
-              <MicrofrontendTwo token={token} authConfig={authConfig} />
-            </Route>
-            <Route path="/signin">
-              <p>Please authenticate again</p>
-            </Route>
-          </Switch>
+          <Switch>{getRoutes(authConfig)}</Switch>
         </Layout.Page>
       </Layout.Content>
     </Layout>
