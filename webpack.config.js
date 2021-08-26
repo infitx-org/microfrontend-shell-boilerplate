@@ -3,7 +3,9 @@ const ForkTsCheckerWebpackPlugin = require('fork-ts-checker-webpack-plugin');
 const { ModuleFederationPlugin } = require('webpack').container;
 const DotenvPlugin = require('dotenv-webpack');
 const path = require('path');
-const { parsed: config } = require('dotenv').config();
+const { parsed: config } = require('dotenv').config({
+  path: './.env.local',
+});
 
 module.exports = {
   entry: './src/index',
