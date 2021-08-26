@@ -9,7 +9,6 @@ const services = {
   },
   jsonplaceholder: {
     baseUrl: (state: State) => state.config.api.apiBaseUrl,
-    // mock: () => true
   },
 };
 
