@@ -1,5 +1,6 @@
 import { createSelectorHook } from 'react-redux';
-import { State, ReduxContext } from 'store';
+import { State } from 'store';
+import ReduxContext from 'store/context';
 import { AuthConfig } from './types';
 
 const useSelector = createSelectorHook(ReduxContext);
