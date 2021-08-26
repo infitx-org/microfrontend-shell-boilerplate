@@ -2,6 +2,7 @@ import React from 'react';
 import { Menu } from 'components';
 import { useHistory, useLocation } from 'react-router-dom';
 import Loader from 'utils/loader';
+import { MenuItemElement } from '@modusbox/react-components/lib/components/Menu/types';
 
 const data = [
   {
@@ -40,7 +41,7 @@ function MainMenu() {
     onChange: history.push,
   };
 
-  const menuItems = getMenuItems(location.pathname, history.push);
+  const menuItems = (getMenuItems(location.pathname, history.push) as unknown) as MenuItemElement;
 
   const menu = (
     <Menu {...menuProps}>
