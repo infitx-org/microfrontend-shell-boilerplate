@@ -1,4 +1,4 @@
-import { State } from 'store/types';
+import { State } from 'store';
 import authMock from 'Auth/_mockData';
 import buildApis, { buildEndpointBuilder } from '@modusbox/redux-utils/lib/api';
 
@@ -9,7 +9,6 @@ const services = {
   },
   jsonplaceholder: {
     baseUrl: (state: State) => state.config.api.apiBaseUrl,
-    // mock: () => true
   },
 };
 

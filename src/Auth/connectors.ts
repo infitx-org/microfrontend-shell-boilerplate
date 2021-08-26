@@ -1,4 +1,5 @@
 import { State, Dispatch } from 'store';
+import ReduxContext from 'store/context';
 import { connect, ConnectedProps } from 'react-redux';
 import { actions } from './slice';
 import * as selectors from './selectors';
@@ -15,6 +16,8 @@ const authConnector = connect(
     doAuth: () => dispatch(actions.doAuth()),
     onLogoutClick: () => dispatch(actions.logout()),
   }),
+  null,
+  { context: ReduxContext },
 );
 
 export type AuthProps = ConnectedProps<typeof authConnector>;

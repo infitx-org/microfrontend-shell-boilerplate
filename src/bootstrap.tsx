@@ -1,9 +1,9 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import { Provider, ReactReduxContext } from 'react-redux';
+import { Provider } from 'react-redux';
 import { createBrowserHistory } from 'history';
 import { ConnectedRouter } from 'connected-react-router';
-import configureStore from './store/configureStore';
+import configureStore, { ReduxContext } from './store';
 import getConfig from './Config';
 import App from './App';
 import { hocs as authHocs } from './Auth';
@@ -36,8 +36,8 @@ async function boot() {
   );
 
   const ConnectedApp = () => (
-    <Provider store={store}>
-      <ConnectedRouter history={history} context={ReactReduxContext}>
+    <Provider store={store} context={ReduxContext}>
+      <ConnectedRouter history={history} context={ReduxContext}>
         <AuthApp />
       </ConnectedRouter>
     </Provider>
