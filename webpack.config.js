@@ -12,9 +12,7 @@ const { parsed } = require('dotenv').config({
 const config = {
   DEV_PORT: DEV_PORT || parsed.DEV_PORT,
   PUBLIC_PATH: VERCEL_URL ? `https://${VERCEL_URL}/` : parsed.PUBLIC_PATH,
-}
-
-console.log({ config });
+};
 
 module.exports = {
   entry: './src/index',

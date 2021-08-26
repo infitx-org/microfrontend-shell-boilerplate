@@ -4,8 +4,6 @@ import Loader from 'utils/loader';
 
 const [url, name, component] = (process.env.MICROFRONTEND_ONE || '').split('|');
 
-console.log(process.env.MICROFRONTEND_ONE);
-
 interface SharedProps {
   token: string | null;
   authConfig: AuthConfig;
