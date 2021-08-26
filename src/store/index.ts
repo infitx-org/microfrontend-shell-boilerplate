@@ -1,4 +1,3 @@
-import configureStore from './configureStore';
-
-export default configureStore;
+export { default } from './configureStore';
+export { default as ReduxContext } from './context';
 export * from './types';
