@@ -8,8 +8,8 @@ const remotes = [
     appName: 'app',
   },
   {
-    path: '/dynamic-runtime-subpath',
-    label: 'Remote App 1',
+    path: '/app2',
+    label: 'Remote App 2',
     menuComponent: 'Menu',
     appComponent: 'App',
     url: `${process.env.REMOTE_2_URL}/app.js`,
