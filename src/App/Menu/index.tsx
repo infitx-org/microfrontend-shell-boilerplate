@@ -1,9 +1,32 @@
 import React from 'react';
 import { Menu } from 'components';
 import { useHistory, useLocation } from 'react-router-dom';
-import { MenuOne } from 'App/Microfrontends';
+import Loader from 'utils/loader';
+import { MenuItemElement } from '@modusbox/react-components/lib/components/Menu/types';
+import { Remote } from 'App/types';
 
-function MainMenu() {
+function getMenuItems(remotes: Remote[], pathname: string, onChange: (path: string) => void) {
+  return remotes.map(({ path, label, menuComponent, url, appName }) => {
+    return (
+      <Menu.Item key={path} path={path} label={label} partial>
+        <Menu.Item path="/" label="back to main menu" back />
+        <Loader
+          url={url}
+          appName={appName}
+          component={menuComponent}
+          pathname={pathname}
+          onChange={onChange}
+          path={path}
+        />
+      </Menu.Item>
+    );
+  });
+}
+
+interface MainMenuProps {
+  remotes: Remote[];
+}
+function MainMenu({ remotes }: MainMenuProps) {
   const history = useHistory();
   const location = useLocation();
   const menuProps = {
@@ -12,13 +35,16 @@ function MainMenu() {
     onChange: history.push,
   };
 
+  const menuItems = (getMenuItems(
+    remotes,
+    location.pathname,
+    history.push,
+  ) as unknown) as MenuItemElement;
+
   const menu = (
     <Menu {...menuProps}>
       <Menu.Section label="Apps">
-        <Menu.Item path="/child" label="Child App 1 microfrontend" partial>
-          <Menu.Item path="/" label="back to main menu" back />
-          <MenuOne path="/child" pathname={location.pathname} onChange={history.push} />
-        </Menu.Item>
+        {menuItems}
         <Menu.Item path="/other" label="Child App 2 microfrontend" />
       </Menu.Section>
     </Menu>
