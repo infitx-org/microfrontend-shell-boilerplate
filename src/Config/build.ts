@@ -11,7 +11,7 @@ export default async (): Promise<AppConfig & AuthConfig & ApiConfig> => {
     apiBaseUrl: `${process.env.REACT_APP_API_BASE_URL}`,
     isAuthEnabled: process.env.REACT_APP_AUTH_ENABLED !== 'false',
     basename: '',
-    mockApi: process.env.REACT_APP_MOCK_API === 'true',
+    mockApi: process.env.MOCK_API === 'true',
   };
 
   const config = { ...defaults };
