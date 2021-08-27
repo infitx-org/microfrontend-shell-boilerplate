@@ -7,6 +7,14 @@ const remotes = [
     url: `${process.env.REMOTE_1_URL}/app.js`,
     appName: 'app',
   },
+  {
+    path: '/app2',
+    label: 'Remote App 2',
+    menuComponent: 'Menu',
+    appComponent: 'App',
+    url: `${process.env.REMOTE_2_URL}/app2.js`,
+    appName: 'app2',
+  },
 ];
 
 
