@@ -1,5 +1,6 @@
 import { State } from 'store';
 import authMock from 'Auth/_mockData';
+import remotesMock from 'App/_mockData';
 import buildApis, { buildEndpointBuilder } from '@modusbox/redux-utils/lib/api';
 
 const services = {
@@ -7,8 +8,9 @@ const services = {
     baseUrl: '',
     mock: () => true,
   },
-  jsonplaceholder: {
+  mainApi: {
     baseUrl: (state: State) => state.config.api.apiBaseUrl,
+    mock: (state: State) => state.config.api.mockApi,
   },
 };
 
@@ -20,8 +22,9 @@ export default buildApis({
     url: (state: State) => state.config.auth.tokenEndpoint,
     mock: authMock,
   }),
-  posts: builder({
-    service: services.jsonplaceholder,
-    url: () => '/posts',
+  remotes: builder({
+    service: services.mainApi,
+    url: '/remotes',
+    mock: remotesMock,
   }),
 });

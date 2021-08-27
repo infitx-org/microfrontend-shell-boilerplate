@@ -4,14 +4,15 @@ const { ModuleFederationPlugin } = require('webpack').container;
 const DotenvPlugin = require('dotenv-webpack');
 const path = require('path');
 
-const { DEV_PORT, VERCEL_URL } = process.env;
-const { parsed } = require('dotenv').config({
+require('dotenv').config({
   path: './.env',
 });
 
+const { DEV_PORT, VERCEL_URL, PUBLIC_PATH } = process.env;
+
 const config = {
-  DEV_PORT: DEV_PORT || parsed.DEV_PORT,
-  PUBLIC_PATH: VERCEL_URL ? `https://${VERCEL_URL}/` : parsed.PUBLIC_PATH,
+  DEV_PORT,
+  PUBLIC_PATH: VERCEL_URL ? `https://${VERCEL_URL}/` : PUBLIC_PATH,
 };
 
 module.exports = {

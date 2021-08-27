@@ -14,6 +14,7 @@ interface LoaderProps {
   component: string;
   Fallback?: ComponentType;
   children?: React.ReactNode;
+  [x: string]: any;
 }
 
 interface LazyProps {
