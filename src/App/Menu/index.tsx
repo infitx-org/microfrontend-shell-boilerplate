@@ -4,6 +4,7 @@ import { useHistory, useLocation } from 'react-router-dom';
 import Loader from 'utils/loader';
 import { MenuItemElement } from '@modusbox/react-components/lib/components/Menu/types';
 import { Remote } from 'App/types';
+import './Menu.scss';
 
 function getMenuItems(remotes: Remote[], pathname: string, onChange: (path: string) => void) {
   return remotes.map(({ path, label, menuComponent, url, appName }) => {
@@ -47,7 +48,7 @@ function MainMenu({ remotes }: MainMenuProps) {
     </Menu>
   );
 
-  return <div className="layout__side-menu">{menu}</div>;
+  return <div className="app__menu">{menu}</div>;
 }
 
 export default MainMenu;
