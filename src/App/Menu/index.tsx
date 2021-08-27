@@ -43,10 +43,7 @@ function MainMenu({ remotes }: MainMenuProps) {
 
   const menu = (
     <Menu {...menuProps}>
-      <Menu.Section label="Apps">
-        {menuItems}
-        <Menu.Item path="/other" label="Child App 2 microfrontend" />
-      </Menu.Section>
+      <Menu.Section label="Apps">{menuItems}</Menu.Section>
     </Menu>
   );
 
