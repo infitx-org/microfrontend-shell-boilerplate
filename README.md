@@ -118,6 +118,6 @@ const config = {
 
 #### Resources
 
-https://webpack.js.org/concepts/module-federation/
-https://github.com/module-federation/module-federation-examples
-https://github.com/modusintegration/microfrontend-shell-boilerplate
+ - https://webpack.js.org/concepts/module-federation/
+ - https://github.com/module-federation/module-federation-examples
+ - https://github.com/modusintegration/microfrontend-boilerplate
