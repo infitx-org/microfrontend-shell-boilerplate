@@ -12,8 +12,8 @@ const remotes = [
     label: 'Remote App 2',
     menuComponent: 'Menu',
     appComponent: 'App',
-    url: `${process.env.REMOTE_2_URL}/app.js`,
-    appName: 'app',
+    url: `${process.env.REMOTE_2_URL}/app2.js`,
+    appName: 'app2',
   },
 ];
 
