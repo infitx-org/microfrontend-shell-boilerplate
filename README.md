@@ -4,7 +4,7 @@ This is the Shell application boilerplate project to create microfrontends.
 
 It is based on React / Redux and it is built in Typescript and developed with Webpack, Babel, Eslint, Prettier.
 
-Includes React Router, Redux Saga, and the @Modusbox UI components.
+Includes React Router, Redux Saga, and @modusbox/react-components.
 
 It provides a basic module structure ready to be used, a webpack configuration that exports the microfrontend so that it can be lazy loaded.
 
@@ -14,7 +14,7 @@ bi-directional apps where the host consumes remotes but can also be consumed by 
 `microfrontend-shell-boilerplate` is a default host(parent) boilerplate
 meant to consume one or more child microfrontends such as `microfrontend-boilerplate`.
 
-https://github.com/modusintegration/microfrontend-boilerplate
+[microfrontend-boilerplate](https://github.com/modusintegration/microfrontend-boilerplate)
 
 #### Available scripts
 
@@ -91,8 +91,12 @@ When working with several host/remote applications it is a requirement that
 `PUBLIC_PATH` and `DEV_PORT` are updated to avoid port collision.
 
 ```
-DEV_PORT=3012
-PUBLIC_PATH=http://localhost:3012/
+REACT_APP_API_BASE_URL=/api          // base path for api (could be a URL)
+REACT_APP_AUTH_ENABLED=true          // enabled or disables auth
+REACT_APP_MOCK_API=true              // necessary to mock api locally
+REMOTE_1_URL=http://localhost:3012   // where to load the app 1
+DEV_PORT=3001                        // dev only / http port
+PUBLIC_PATH=http://localhost:3001/   // dev only, public url, VERCEL_URL used in cloud
 ```
 
 #### Deployment - In Progress
@@ -105,15 +109,12 @@ Just update `webpack.config.js` to pull and set env variables from a hosting ser
 into `DEV_PORT` and `PUBLIC_PATH`.
 
 ```javascript
-const { DEV_PORT, VERCEL_URL } = process.env;
-const { parsed } = require('dotenv').config({
-  path: './.env',
-});
+const { DEV_PORT, VERCEL_URL, PUBLIC_PATH } = process.env;
 
 const config = {
-  DEV_PORT: DEV_PORT || parsed.DEV_PORT,
-  PUBLIC_PATH: VERCEL_URL ? `https://${VERCEL_URL}/` : parsed.PUBLIC_PATH,
-}
+  DEV_PORT,
+  PUBLIC_PATH: VERCEL_URL ? `https://${VERCEL_URL}/` : PUBLIC_PATH,
+};
 ```
 
 #### Resources
