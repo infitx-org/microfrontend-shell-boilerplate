@@ -25,7 +25,7 @@ const whoami = {
 
 export default {
   read: {
-    delay: 200,
+    delay: 2000,
     call: () => ({
       status: 200,
       data: whoami,

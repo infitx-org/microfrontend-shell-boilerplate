@@ -1,4 +1,5 @@
 import React, { Component, ComponentType, Suspense } from 'react';
+import { Row, Spinner } from 'components';
 import loadComponent from './loadComponent';
 import ErrorBoundary from './ErrorBoundary';
 import PubSub from './pubsub';
@@ -22,7 +23,11 @@ interface LazyProps {
 }
 
 function BaseFallback() {
-  return <div>Loading...</div>;
+  return (
+    <Row style={{ height: '100px' }}>
+      <Spinner center />
+    </Row>
+  );
 }
 
 export default class Loader extends Component<LoaderProps> {

@@ -1,5 +1,5 @@
 import React, { useEffect } from 'react';
-import { Layout, MessageBox } from 'components';
+import { Layout, MessageBox, Spinner } from 'components';
 import Router from './Router';
 import appConnector, { AppProps } from './connectors';
 import { Remote } from './types';
@@ -12,7 +12,7 @@ function App({ onMount, remotes }: AppProps) {
 
   let content = null;
   if (remotes.pending || !remotes.initialized) {
-    content = <MessageBox kind="default">"Loading Remotes</MessageBox>;
+    content = <Spinner center />;
   } else if (remotes.error) {
     content = <MessageBox kind="danger">{remotes.error}</MessageBox>;
   } else {
@@ -20,7 +20,7 @@ function App({ onMount, remotes }: AppProps) {
   }
 
   return (
-    <Layout>
+    <Layout className="layout__container">
       <Layout.Navbar username="Guest User" title="Shell Application Container" />
       <Layout.Content>{content}</Layout.Content>
     </Layout>

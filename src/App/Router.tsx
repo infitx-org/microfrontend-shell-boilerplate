@@ -30,7 +30,7 @@ function Router({ remotes }: RouterProps) {
   const authConfig = useAuthConfig();
   return (
     <>
-      <Layout.SideMenu className="app__menu__container">
+      <Layout.SideMenu>
         <Menu remotes={remotes} />
       </Layout.SideMenu>
       <Layout.Page>
