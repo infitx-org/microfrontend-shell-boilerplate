@@ -22,6 +22,10 @@ function getRoutes(remotes: Remote[], authConfig: AuthConfig) {
   });
 }
 
+function NotFound() {
+  return <Route>We are sorry but the page you are looking for does not exist</Route>;
+}
+
 interface RouterProps {
   remotes: Remote[];
 }
@@ -34,7 +38,10 @@ function Router({ remotes }: RouterProps) {
         <Menu remotes={remotes} />
       </Layout.SideMenu>
       <Layout.Page>
-        <Switch>{getRoutes(remotes, authConfig)}</Switch>
+        <Switch>
+          {getRoutes(remotes, authConfig)}
+          <NotFound />
+        </Switch>
       </Layout.Page>
     </>
   );
