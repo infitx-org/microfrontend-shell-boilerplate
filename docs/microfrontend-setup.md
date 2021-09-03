@@ -8,6 +8,7 @@ It is responsible to load the children modules/app at runtime and provide them w
 
 - [Isolation And Defined Boundary](#isolation-and-defined-boundary)
 - [Webpack Module Federation](#webpack-module-federation)
+- [Loading Children Modules](#loading-children-modules)
 
 
 ### Isolation And Defined Boundary
