@@ -6,6 +6,8 @@ This is the Shell application boilerplate project to create microfrontends.
 
 It's built in React / Redux / Typescript and it includes some other libraries.
 
+This project follows [JAMStack](https://jamstack.org/) architecture and attempts to follow it's best practices.
+
 - [Prerequisites](#prerequisites)
 - [Installation](#installation)
 - [How to develop](#how-to-develop)
@@ -69,7 +71,7 @@ All the dev tools are already pre-configured and everything should work out of t
 
 For more details read [configuring the tools](./docs/configuring-the-tools.md).
 
-- [External API](./docs/external-api.md)
+- [Microfrontend setup](./docs/microfrontend-setup.md)
 - [Configuring the tools](./docs/configuring-the-tools.md)
 - [Environment variables](./docs/environment-variables.md)
-- [Microfrontend setup](./docs/microfrontend-setup.md)
+- [External API](./docs/external-api.md)
