@@ -71,5 +71,5 @@ For more details read [configuring the tools](./docs/configuring-the-tools.md).
 
 - [External API](./docs/external-api.md)
 - [Configuring the tools](./docs/configuring-the-tools.md)
-- [Environment variables]('./docs/environment-variables.md)
-- [Microfrontend setup]('./docs/microfrontend-setup.md)
+- [Environment variables](./docs/environment-variables.md)
+- [Microfrontend setup](./docs/microfrontend-setup.md)
