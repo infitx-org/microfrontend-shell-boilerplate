@@ -1,8 +1,10 @@
 ![Build Status](https://github.com/modusintegration/microfrontend-shell-boilerplate/actions/workflows/node.js.yml/badge.svg)
 
-# microfrontend-shell-boilerplate
+# Microfrontend Shell Boilerplate
 
-The project is a React/Redux application. It includes redux-saga and client side routing.
+This is the Shell application boilerplate project to create microfrontends.
+
+It's built in React / Redux / Typescript and it includes some other libraries.
 
 - [Prerequisites](#prerequisites)
 - [Installation](#installation)
@@ -41,8 +43,6 @@ Before starting writing code, make sure you follow the [coding guidelines](./doc
 - [Structuring the code](./docs/structuring-the-code.md)
 - [Coding guidelines](./docs/coding-guidelines.md)
 - [Available scripts and commands](./docs/available-scripts-and-commands.md)
-- [Environment Variables]('./docs/environment-variables.md)
-- [Microfrontend setup]('./docs/microfrontend-setup.md)
 
 For detailed instructions on what are the steps to follow when developing, please read the [development steps](./docs/development-steps.md) page.
 
@@ -69,7 +69,7 @@ All the dev tools are already pre-configured and everything should work out of t
 
 For more details read [configuring the tools](./docs/configuring-the-tools.md).
 
-- [Proxy](./docs/proxy.md)
 - [External API](./docs/external-api.md)
-- [Authentication](./docs/authentication.md)
 - [Configuring the tools](./docs/configuring-the-tools.md)
+- [Environment variables]('./docs/environment-variables.md)
+- [Microfrontend setup]('./docs/microfrontend-setup.md)
