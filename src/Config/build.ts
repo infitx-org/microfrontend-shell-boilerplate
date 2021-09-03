@@ -27,25 +27,25 @@ export default async (): Promise<AppConfig & AuthConfig & ApiConfig> => {
       TOKEN_URL,
     } = await fetch(`${baseUrl}/config.json`).then((response) => response.json());
 
-    if (TOKEN_URL) {
+    if (TOKEN_URL !== undefined) {
       config.tokenEndpoint = TOKEN_URL;
     }
-    if (LOGIN_URL) {
+    if (LOGIN_URL !== undefined) {
       config.loginEndpoint = LOGIN_URL;
     }
-    if (LOGOUT_URL) {
+    if (LOGOUT_URL !== undefined) {
       config.logoutEndpoint = LOGOUT_URL;
     }
-    if (API_BASE_URL) {
+    if (API_BASE_URL !== undefined) {
       config.apiBaseUrl = API_BASE_URL;
     }
-    if (MOCK_API) {
+    if (MOCK_API !== undefined) {
       config.mockApi = MOCK_API === 'true';
     }
-    if (AUTH_ENABLED) {
+    if (AUTH_ENABLED !== undefined) {
       config.isAuthEnabled = AUTH_ENABLED !== 'false';
     }
-    if (DIST_PUBLIC_URL) {
+    if (DIST_PUBLIC_URL !== undefined) {
       const distPublicUrl = new URL(DIST_PUBLIC_URL || baseUrl);
       config.basename = distPublicUrl.pathname;
     }

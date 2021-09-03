@@ -55,5 +55,6 @@ docker run --rm \
   -e TOKEN_URL="https://your-token-url" \
   -e LOGIN_URL="https://your-login-url" \
   -e LOGOUT_URL="https://your-logout-url" \
+  -e AUTH_ENABLED="false" \
    microfrontend-shell-boilerplate
 ```

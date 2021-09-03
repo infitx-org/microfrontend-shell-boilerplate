@@ -6,7 +6,7 @@ import buildApis, { buildEndpointBuilder } from '@modusbox/redux-utils/lib/api';
 const services = {
   kratos: {
     baseUrl: '',
-    mock: () => true,
+    mock: (state: State) => state.config.api.mockApi,
   },
   mainApi: {
     baseUrl: (state: State) => state.config.api.apiBaseUrl,

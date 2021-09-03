@@ -12,6 +12,7 @@
     "lint": "eslint --ext .js,.jsx,.ts,.tsx src --color",
     "prepare": "husky install",
     "prettier": "prettier --write 'src/**/*.{ts,tsx,js,scss,css,json}' 'webpack.*.js'",
+    "version": "node -pe \"require('./package.json').version\"",
     "test": "jest --env=jsdom"
   },
   "author": "",

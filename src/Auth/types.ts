@@ -23,15 +23,7 @@ export interface LoggedUser {
   };
 }
 
-export interface AuthConfig {
-  loginEndpoint: string;
-  logoutEndpoint: string;
-  tokenEndpoint: string;
-  isAuthEnabled: boolean;
-}
-
 export interface AuthState {
-  config: AuthConfig;
   isAuthPending: boolean;
   isLoggedIn: boolean;
   authError: null | string;

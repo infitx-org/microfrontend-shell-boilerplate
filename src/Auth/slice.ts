@@ -2,12 +2,6 @@ import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 import { AuthState, LoggedUser } from './types';
 
 export const initialState: AuthState = {
-  config: {
-    tokenEndpoint: '',
-    loginEndpoint: '',
-    logoutEndpoint: '',
-    isAuthEnabled: true,
-  },
   user: undefined,
   isAuthPending: false,
   isLoggedIn: false,
