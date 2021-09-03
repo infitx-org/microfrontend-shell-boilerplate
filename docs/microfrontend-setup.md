@@ -6,12 +6,59 @@ It is responsible to load the children modules/app at runtime and provide them w
 
 `microfrontend-shell-boilerplate` is a default host(parent) boilerplate meant to consume one or more child microfrontends such as [microfrontend-boilerplate](https://github.com/modusintegration/microfrontend-boilerplate).
 
-Enabling code splitting for the microfrontend shell is done using the Webpack _ModuleFederationPlugin_.
+- [Isolation And Defined Boundary](#isolation-and-defined-boundary)
+- [Webpack Module Federation](#webpack-module-federation)
 
-### Configuring Webpack Module Federeation
+
+### Isolation And Defined Boundary
+
+- [Custom Redux Context](#custom-redux-context)
+- [CSS Namespaceing](#css-namespacing)
+
+
+#### Custom Redux Context
+
+The Redux store needs to be isolated and non accessible by the children applications.
+
+For such reason, the store module (`src/store`) exports a custom React Context that is used in the Redux / React-Router Provider components.
+
+```tsx
+import configureStore, { ReduxContext } from './store';
+///
+///
+const ConnectedApp = () => (
+  <Provider store={store} context={ReduxContext}>
+    <ConnectedRouter history={history} context={ReduxContext}>
+      <AuthApp />
+    </ConnectedRouter>
+  </Provider>
+);
+```
+
+**Note** While it's not necessary to use  in the host, it's still quite convenient to separate React from the application flow and business logic.
+
+You can choose to adopt a different state manager as long as you keep it isolated and do not allow the children applications to access it.
+
+#### CSS Namespacing
+
+Due to the nature of the architecture, it's not possible to eliminate the issue of classnames collision. 
+
+It's good practice to namespace your css classnames in the remote children and keep the host ones very specific.
+
+
+### Webpack Module Federation
+
+The default configuration works when running the host locally, however it's necessary to adjust the settings before deploying online.
 
 In the project root directory you can find the `webpack.config.js` configuration file.
 
+- [Code Splitting](#code-splitting)
+- [Public Path](#public-path)
+- [Module Federation Plugin](#module-federation-plugin)
+
+#### Code Splitting
+
+Code splitting is automatically enabled when using the _ModuleFederationPlugin_.
 
 #### Public Path
 
