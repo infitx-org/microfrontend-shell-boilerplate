@@ -26,7 +26,6 @@ The application is driven by some environment variables used at build and runtim
 | Name | Description |
 |---|---|
 | `API_BASE_URL` | base path for api (could be a URL) |
-| `TOKEN_URL` | where to retrieve the token |
 | `LOGIN_URL` | where to redirect for login |
 | `LOGOUT_URL` | where to redirect for logout |
 | `MOCK_API` | enable mocking api |

@@ -10,26 +10,17 @@ export default async (): Promise<AppConfig & AuthConfig & ApiConfig> => {
     tokenEndpoint: `${baseUrl}/kratos/sessions/whoami`,
     apiBaseUrl: `${process.env.REACT_APP_API_BASE_URL}`,
     isAuthEnabled: process.env.REACT_APP_AUTH_ENABLED !== 'false',
-    basename: '',
+    basename: baseUrl,
     mockApi: process.env.REACT_APP_MOCK_API === 'true',
   };
 
   const config = { ...defaults };
 
   try {
-    const {
-      API_BASE_URL,
-      AUTH_ENABLED,
-      DIST_PUBLIC_URL,
-      LOGIN_URL,
-      LOGOUT_URL,
-      MOCK_API,
-      TOKEN_URL,
-    } = await fetch(`${baseUrl}/config.json`).then((response) => response.json());
+    const { API_BASE_URL, AUTH_ENABLED, LOGIN_URL, LOGOUT_URL, MOCK_API } = await fetch(
+      `${baseUrl}/config.json`,
+    ).then((response) => response.json());
 
-    if (TOKEN_URL !== undefined) {
-      config.tokenEndpoint = TOKEN_URL;
-    }
     if (LOGIN_URL !== undefined) {
       config.loginEndpoint = LOGIN_URL;
     }
@@ -44,10 +35,6 @@ export default async (): Promise<AppConfig & AuthConfig & ApiConfig> => {
     }
     if (AUTH_ENABLED !== undefined) {
       config.isAuthEnabled = AUTH_ENABLED !== 'false';
-    }
-    if (DIST_PUBLIC_URL !== undefined) {
-      const distPublicUrl = new URL(DIST_PUBLIC_URL || baseUrl);
-      config.basename = distPublicUrl.pathname;
     }
   } catch (err) {
     // eslint-disable-next-line

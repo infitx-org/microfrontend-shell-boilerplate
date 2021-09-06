@@ -7,7 +7,6 @@ echo "{
   \"LOGIN_URL\": \"${LOGIN_URL}\",
   \"LOGOUT_URL\": \"${LOGOUT_URL}\",
   \"MOCK_API\": \"${MOCK_API}\",
-  \"TOKEN_URL\": \"${TOKEN_URL}\"
 }" | jq '.' > config.json
 
 # This will exec the CMD from your Dockerfile, i.e. "npm start"
