@@ -56,6 +56,7 @@ In the project root directory you can find the `webpack.config.js` configuration
 - [Code Splitting](#code-splitting)
 - [Public Path](#public-path)
 - [Module Federation Plugin](#module-federation-plugin)
+- [Resources](#resources)
 
 #### Code Splitting
 
@@ -124,9 +125,11 @@ It is used as follows:
   />
 ```
 
+You can modify it accordingly to your needs. It's worth noting that you should always provide the remote module with the relevant context.
+
 #### Resources
 
- - https://webpack.js.org/concepts/module-federation/
- - https://github.com/module-federation/module-federation-examples
- - https://github.com/modusintegration/microfrontend-boilerplate
- - https://jamstack.org/
+ - [Module Federation Docs](https://webpack.js.org/concepts/module-federation/)
+ - [Module Federation Examples](https://github.com/module-federation/module-federation-examples)
+ - [Microfrontend Boilerplate](https://github.com/modusintegration/microfrontend-boilerplate)
+ - [Jamstack](https://jamstack.org/)

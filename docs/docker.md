@@ -52,8 +52,9 @@ The `config.json` is produced at runtime, it uses environment variables passed t
 docker run --rm \
   -p 8080:8080 \
   -e API_BASE_URL="https://your-api-base-url" \
-  -e TOKEN_URL="https://your-token-url" \
   -e LOGIN_URL="https://your-login-url" \
   -e LOGOUT_URL="https://your-logout-url" \
+  -e AUTH_ENABLED="true" \
+  -e MOCK_API="true" \
    microfrontend-shell-boilerplate
 ```

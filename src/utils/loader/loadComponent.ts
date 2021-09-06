@@ -39,11 +39,20 @@ class Externals {
   }
 }
 
-async function init(resolve: (arg: any) => void, scope: string, component: string) {
-  // @ts-ignore
-  const factory = await window[scope].get(`./${component}`);
-  const Module = factory();
-  resolve(Module);
+async function init(
+  resolve: (arg: any) => void,
+  reject: (arg: any) => void,
+  scope: string,
+  component: string,
+) {
+  try {
+    // @ts-ignore
+    const factory = await window[scope].get(`./${component}`);
+    const Module = factory();
+    resolve(Module);
+  } catch (e) {
+    reject(e);
+  }
 }
 
 const externals = new Externals();
@@ -83,7 +92,7 @@ export default function loadComponent<Props = any>(
 
       // this is the callback returning the compnent we want to run
       // once the script is loaded and the container is initialized
-      const resolveComponent = () => init(resolve, scope, component);
+      const resolveComponent = () => init(resolve, reject, scope, component);
 
       if (externals.hasLoadedApp(app)) {
         // resolve immediately

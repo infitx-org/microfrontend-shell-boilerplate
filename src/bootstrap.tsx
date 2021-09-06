@@ -46,4 +46,12 @@ async function boot() {
   ReactDOM.render(<ConnectedApp />, document.getElementById('root'));
 }
 
+if (process.env.NODE_ENV !== 'development') {
+  // eslint-disable-next-line
+  console.info('Version', process.env.REACT_APP_VERSION);
+
+  // eslint-disable-next-line
+  console.info('Commit', process.env.REACT_APP_COMMIT);
+}
+
 boot();
