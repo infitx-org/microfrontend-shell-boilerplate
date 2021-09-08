@@ -1,5 +1,5 @@
 # First part, build the app
-FROM node:12.18.4-alpine as microfrontend-shell-boilerplate-builder
+FROM node:16-alpine as microfrontend-shell-boilerplate-builder
 LABEL stage=microfrontend-shell-boilerplate-builder
 
 COPY package.json .

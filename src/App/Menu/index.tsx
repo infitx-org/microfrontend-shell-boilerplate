@@ -36,11 +36,11 @@ function MainMenu({ remotes }: MainMenuProps) {
     onChange: history.push,
   };
 
-  const menuItems = (getMenuItems(
+  const menuItems = getMenuItems(
     remotes,
     location.pathname,
     history.push,
-  ) as unknown) as MenuItemElement;
+  ) as unknown as MenuItemElement;
 
   const menu = (
     <Menu {...menuProps}>
