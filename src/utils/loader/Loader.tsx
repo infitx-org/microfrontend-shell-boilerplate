@@ -1,13 +1,13 @@
 import React, { Component, ComponentType, Suspense } from 'react';
 import { Row, Spinner } from 'components';
+import { PubSub } from '@modusbox/microfrontend-utils';
 import loadComponent from './loadComponent';
 import ErrorBoundary from './ErrorBoundary';
-import PubSub from './pubsub';
 
 const pubSub = new PubSub();
 
-setInterval(() => pubSub.dispatch('channel-A', 'Hey'), 300);
-setInterval(() => pubSub.dispatch('channel-B', 'Hey'), 1000);
+pubSub.dispatch('channel-A', 'channel-A queue message', { persist: 10000 });
+// setInterval(() => pubSub.dispatch('channel-B', 'Hey'), 1000);
 
 interface LoaderProps {
   url: string;

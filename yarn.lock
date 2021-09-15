@@ -1232,6 +1232,13 @@
     "@types/yargs" "^16.0.0"
     chalk "^4.0.0"
 
+"@modusbox/microfrontend-utils@^0.0.2":
+  version "0.0.2"
+  resolved "https://registry.yarnpkg.com/@modusbox/microfrontend-utils/-/microfrontend-utils-0.0.2.tgz#2017631f19f8842283d06a2a572f0843bbff13bf"
+  integrity sha512-e/uiBpatFjmI1jhn4j2qOLuwa+OZH8TyFoae+1K0wXwVw7hHtvCVgWnMkxzCLZbO+OrYblE+7b+fZ2TNeTF2tw==
+  dependencies:
+    lodash "^4.17.21"
+
 "@modusbox/react-components@^0.1.4":
   version "0.1.7"
   resolved "https://registry.yarnpkg.com/@modusbox/react-components/-/react-components-0.1.7.tgz#1c74bce613bbccc35f913b3c96865a154260ad4b"
