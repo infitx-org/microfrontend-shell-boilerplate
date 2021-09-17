@@ -1,24 +1,37 @@
 import React, { Component, ComponentType, Suspense } from 'react';
 import { Row, Spinner } from 'components';
-import { PubSub } from '@modusbox/microfrontend-utils';
+import { PubSub, AuthConfig } from '@modusbox/microfrontend-utils';
 import loadComponent from './loadComponent';
 import ErrorBoundary from './ErrorBoundary';
 
 const pubSub = new PubSub();
 
 pubSub.dispatch('channel-A', 'channel-A queue message', { persist: 10000 });
-// setInterval(() => pubSub.dispatch('channel-B', 'Hey'), 1000);
 
-interface LoaderProps {
+interface BaseLoaderProps {
   url: string;
   appName: string;
   component: string;
   Fallback?: ComponentType;
   children?: React.ReactNode;
   [x: string]: any;
+  path: string;
 }
 
+type MainLoaderProps = BaseLoaderProps & {
+  main: true;
+  authConfig: AuthConfig;
+};
+
+type SecondaryLoaderProps = BaseLoaderProps & {
+  main: false;
+  authConfig?: undefined;
+};
+
+type LoaderProps = MainLoaderProps | SecondaryLoaderProps;
+
 interface LazyProps {
+  path: string;
   pubSub: PubSub;
 }
 
@@ -43,13 +56,23 @@ export default class Loader extends Component<LoaderProps> {
   }
 
   render() {
-    const { Fallback = BaseFallback, children, ...otherProps } = this.props;
+    const {
+      // these ones are not passed down, only used internally
+      url,
+      appName,
+      component,
+      Fallback = BaseFallback,
+      // these props are passed to the async component
+      path,
+      children,
+      ...otherProps
+    } = this.props;
     const { AsyncComponent } = this;
 
     return (
       <ErrorBoundary>
         <Suspense fallback={<Fallback />}>
-          <AsyncComponent pubSub={pubSub} {...otherProps}>
+          <AsyncComponent pubSub={pubSub} path={path} {...otherProps}>
             {children}
           </AsyncComponent>
         </Suspense>
