@@ -12,11 +12,12 @@ function getRoutes(remotes: Remote[], authConfig: AuthConfig) {
     return (
       <Route path={path} key={path}>
         <Loader
+          main
           url={url}
           appName={appName}
           component={appComponent}
-          authConfig={authConfig}
           path={path}
+          authConfig={authConfig}
         />
       </Route>
     );

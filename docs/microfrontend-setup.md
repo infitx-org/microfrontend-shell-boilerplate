@@ -121,6 +121,7 @@ It is used as follows:
     url="http://localhost:3002/app.js"
     appName="app"
     module="App"
+    path="xyz"
     {...props}
   />
 ```

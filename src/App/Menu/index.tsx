@@ -12,6 +12,7 @@ function getMenuItems(remotes: Remote[], pathname: string, onChange: (path: stri
       <Menu.Item key={path} path={path} label={label} partial>
         <Menu.Item path="/" label="back to main menu" back />
         <Loader
+          main={false}
           url={url}
           appName={appName}
           component={menuComponent}
